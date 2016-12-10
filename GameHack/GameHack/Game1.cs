@@ -35,6 +35,7 @@ namespace GameHack
             panel.AddItem(new WaterObject(new Rectangle(), StatusObj.InPanel, TypeObj.Water));
             panel.AddItem(new WaterObject(new Rectangle(), StatusObj.InPanel, TypeObj.Water));
             panel.AddItem(new WaterObject(new Rectangle(), StatusObj.InPanel, TypeObj.Water));
+            panel.AddItem(new WaterObject(new Rectangle(), StatusObj.InPanel, TypeObj.Water));
             base.Initialize();
         }
 
