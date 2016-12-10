@@ -14,6 +14,7 @@ namespace GameHack.Items
     public class Background : IGameObject
     {
         Texture2D backgroundTexture;
+        Texture2D marsTexture;
         SpriteBatch spriteBatch;
         GraphicsDevice graphicsDevice;
 
@@ -30,12 +31,23 @@ namespace GameHack.Items
             spriteBatch.Begin();
             spriteBatch.Draw(backgroundTexture, new Rectangle(0,0, graphicsDevice.PresentationParameters.BackBufferWidth, graphicsDevice.PresentationParameters.BackBufferHeight), Color.White);
             starts.Draw();
+            spriteBatch.Draw(marsTexture, GetMarsPosition(), Color.White);
             spriteBatch.End();
+        }
+
+        private Rectangle GetMarsPosition()
+        {
+            int x = graphicsDevice.PresentationParameters.BackBufferWidth / 4;
+            int y = graphicsDevice.PresentationParameters.BackBufferHeight / 6;
+            int width = graphicsDevice.PresentationParameters.BackBufferWidth / 2;
+            int height = graphicsDevice.PresentationParameters.BackBufferHeight / 6 * 4;
+            return new Rectangle(x, y, width, height);
         }
 
         public void LoadContent(ContentManager content, SpriteBatch sp)
         {
             backgroundTexture = content.Load<Texture2D>(ContentEnum.BACKGROUND);
+            marsTexture = content.Load<Texture2D>(ContentEnum.MARS);
             starts.LoadContent(content, sp);
             spriteBatch = sp;
         }
@@ -94,10 +106,15 @@ namespace GameHack.Items
             {
                 stars.Remove(rm);
             }
-            if(new Random().Next(0,50) == 0)
+            if(new Random().Next(0,0) == 0)
             {
                 int size = new Random().Next(5, 20);
-                stars.Add(new Rectangle(new Random().Next(1600, 2000), new Random().Next(0, 500), size, size));
+                int x = new Random().Next(0, 3000);
+                if(x > 1600)
+                    stars.Add(new Rectangle(1650, new Random().Next(2, 4) * 100, size, size));
+                else
+                    stars.Add(new Rectangle(x, 0, size, size));
+
             }
            // starts.Add(new Rectangle(300, 300, 20, 20));
         }
