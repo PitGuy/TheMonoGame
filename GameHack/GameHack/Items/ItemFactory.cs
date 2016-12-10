@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using GameHack.Register;
+using Windows.Devices.Input;
 
 namespace GameHack.Items
 {
@@ -69,6 +70,31 @@ namespace GameHack.Items
             return item;
         }
 
+        #region[Events]
+
+        public void MouseClick(Object sender, MouseEventArgs e)
+        {
+            int mouseX = e.MouseDelta.X;
+            int mouseY = e.MouseDelta.Y;
+            foreach(var item in readyItem)
+            {
+                if(this.SelectedItem(item.rectangle, mouseX, mouseY))
+                {
+                    this.buffer = item;
+                }
+            }
+            readyItem.Remove(this.buffer);
+        }
+
+        #endregion
+        #region[Help methods]
+        public bool SelectedItem(Rectangle rectangle, int x, int y)
+        {
+            return (x >= rectangle.X && x <= (rectangle.X + rectangle.Width))
+                    &&
+                    y >= rectangle.Y && y <= (rectangle.Y + rectangle.Height);
+        }
+        #endregion
         public void Draw()
         {
             SetSizePanelItem();

@@ -33,12 +33,12 @@ namespace GameHack.Items
             this.rectangle.Height = height;
         }
         
-        public bool SelectedItem(int x, int y)
+        /*public bool SelectedItem(int x, int y)
         {
             return (x >= this.rectangle.X && x <= (this.rectangle.X + this.rectangle.Width)) 
                     &&
                     y>=this.rectangle.Y && y <= (this.rectangle.Y + this.rectangle.Height);
-        }
+        }*/
         
 
         public override void Draw()
