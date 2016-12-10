@@ -71,7 +71,13 @@ namespace GameHack.Items
 
         public void Draw()
         {
-
+            SetSizePanelItem();
+            spriteBatch.Begin();
+            foreach(ItemObj item in readyItem)
+            {
+                
+            }
+            spriteBatch.End();
         }
 
         public void LoadContent(ContentManager content, SpriteBatch sp)
@@ -82,6 +88,41 @@ namespace GameHack.Items
         public void Update(GameTime gameTime)
         {
 
+        }
+
+        private void SetSizePanelItem()
+        {
+            Rectangle rectangle = panel.GetPanelPosition();
+            int x = rectangle.X;
+            int y = rectangle.Y;
+            int width = rectangle.Width;
+            int height = rectangle.Height;
+            int countItem = readyItem.Count;
+
+            int change_x = 10;
+            int change_y = 10;
+
+            int x_n = 0;
+            int y_n = 0;
+            int width_n = 0;
+            int height_n = 0;
+            int indexItem = 0;
+
+            List<ItemObj> resetItems = new List<ItemObj>();
+            foreach (var item in readyItem)
+            {
+                ItemObj it = item;
+                x_n = x + change_x;
+                y_n = y + change_y + height_n * indexItem;
+                if (width_n == 0) width_n = width - change_x;
+                if (height_n == 0) height_n = height / countItem - change_y;
+
+                Rectangle rec = new Rectangle(x_n, y_n, width_n, height_n);
+                indexItem++;
+                it.rectangle = rec;
+                resetItems.Add(it);
+            }
+            readyItem = resetItems;
         }
     }
 }
