@@ -11,5 +11,6 @@ namespace GameHack.Register
         public const string BACKGROUND = "background";
         public const string STAR = "star";
         public const string MARS = "mars";
+        public const string PANEL = "panel";
     }
 }

@@ -37,10 +37,10 @@ namespace GameHack.Items
 
         private Rectangle GetMarsPosition()
         {
-            int x = graphicsDevice.PresentationParameters.BackBufferWidth / 4;
-            int y = graphicsDevice.PresentationParameters.BackBufferHeight / 6;
-            int width = graphicsDevice.PresentationParameters.BackBufferWidth / 2;
-            int height = graphicsDevice.PresentationParameters.BackBufferHeight / 6 * 4;
+            int x = graphicsDevice.PresentationParameters.BackBufferWidth / 16;
+            int y = graphicsDevice.PresentationParameters.BackBufferHeight / 9;
+            int width = graphicsDevice.PresentationParameters.BackBufferWidth / 16 * 9;
+            int height = graphicsDevice.PresentationParameters.BackBufferHeight / 9 * 7;
             return new Rectangle(x, y, width, height);
         }
 
@@ -69,9 +69,6 @@ namespace GameHack.Items
         public Star()
         {
             stars = new List<Rectangle>();
-            stars.Add(new Rectangle(1600,50, 10, 10));
-            stars.Add(new Rectangle(1800, 100, 10, 10));
-            stars.Add(new Rectangle(2200, 75, 10, 10));
         }
 
         public void Draw()
@@ -93,7 +90,7 @@ namespace GameHack.Items
             List<Rectangle> removeStars = new List<Rectangle>();
             for (int i = 0; i < stars.Count; i++)
             {
-                if (stars[i].X - 25 < -25)
+                if (stars[i].X - Options.STARSPEED_X < -Options.STARSPEED_X)
                 {
                     removeStars.Add(stars[i]);
                 }
@@ -106,17 +103,15 @@ namespace GameHack.Items
             {
                 stars.Remove(rm);
             }
-            if(new Random().Next(0,0) == 0)
+            if(new Random().Next(0,50) == 0)
             {
-                int size = new Random().Next(5, 20);
+                int size = new Random().Next(5, 10);
                 int x = new Random().Next(0, 3000);
                 if(x > 1600)
-                    stars.Add(new Rectangle(1650, new Random().Next(2, 4) * 100, size, size));
+                    stars.Add(new Rectangle(1600, new Random().Next(0, 18) * 50, size, size));
                 else
                     stars.Add(new Rectangle(x, 0, size, size));
-
             }
-           // starts.Add(new Rectangle(300, 300, 20, 20));
         }
     }
 }
