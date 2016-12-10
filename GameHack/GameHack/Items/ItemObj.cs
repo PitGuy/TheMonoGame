@@ -23,6 +23,7 @@ namespace GameHack.Items
 
         public abstract bool SelectedItem(int x, int y);
         public abstract Rectangle GetRectangle();
+        public abstract void SetRectangle(Rectangle rec);
         public abstract void Draw();
         public abstract void LoadContent(ContentManager content, SpriteBatch sp);
         public abstract void Update(GameTime gameTime);

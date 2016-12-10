@@ -11,9 +11,10 @@ using GameHack.Register;
 
 namespace GameHack.Items
 {
-    public class Panel:IGameObject
+    public class Panel : IGameObject
     {
         GraphicsDevice graphicsDevice;
+        ContentManager content;
         private SpriteBatch spriteBatch;
         private Rectangle rectangle;
         private Texture2D texture;
@@ -21,7 +22,7 @@ namespace GameHack.Items
         private List<ItemObj> items;
         private ItemObj bufforItem;
         private int countItem;
-       
+
         public Panel(GraphicsDevice graphicsDevice)
         {
             this.items = new List<ItemObj>();
@@ -38,7 +39,7 @@ namespace GameHack.Items
         }
         public void SelectItem(int x, int y)
         {
-            foreach(var item in this.items)
+            foreach (var item in this.items)
             {
                 if (item.SelectedItem(x, y))
                 {
@@ -57,21 +58,37 @@ namespace GameHack.Items
             int change_x = 10;
             int change_y = 10;
 
+            int x_n = 0;
+            int y_n = 0;
+            int width_n = 0;
+            int height_n = 0;
+            int indexItem = 1;
+
             List<ItemObj> resetItems = new List<ItemObj>();
             foreach (var item in this.items)
             {
                 ItemObj it = item;
-                Rectangle rec = new Rectangle(x + change_x, y + change_y, width / countItem - 2 * change_x, height - 2 * change_y);
-                change_x += 10;
+                x_n =  x + change_x;
+                y_n =  y + change_y + height_n*indexItem;
+                if (width_n == 0) width_n = width - change_x;
+                if (height_n == 0) height_n = height / countItem - change_y;
+
+                Rectangle rec = new Rectangle(x_n, y_n, width_n, height_n);
+                indexItem++;
+                it.SetRectangle(rec);
+                resetItems.Add(it);
             }
             this.items = resetItems;
         }
         public void Draw()
         {
             SetSizeItem();
+            spriteBatch.Begin();
             spriteBatch.Draw(this.texture, GetPanelPosition(), Color.White);
-            foreach(var item in this.items)
+            spriteBatch.End();
+            foreach (var item in this.items)
             {
+                item.LoadContent(content, spriteBatch);
                 item.Draw();
             }
 
@@ -88,13 +105,14 @@ namespace GameHack.Items
 
         public void LoadContent(ContentManager content, SpriteBatch sp)
         {
+            this.content = content;
             this.spriteBatch = sp;
             this.texture = content.Load<Texture2D>(ContentEnum.PANEL);
         }
 
         public void Update(GameTime gameTime)
         {
-            throw new NotImplementedException();
+
         }
     }
 }

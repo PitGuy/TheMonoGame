@@ -12,6 +12,7 @@ namespace GameHack
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Panel panel;
 
         Background background;
         public Game1()
@@ -30,6 +31,10 @@ namespace GameHack
         {
             // TODO: Add your initialization logic here
             background = new Background(GraphicsDevice);
+            panel = new Panel(GraphicsDevice);
+            panel.AddItem(new WaterObject(new Rectangle(), StatusObj.InPanel, TypeObj.Water));
+            panel.AddItem(new WaterObject(new Rectangle(), StatusObj.InPanel, TypeObj.Water));
+            panel.AddItem(new WaterObject(new Rectangle(), StatusObj.InPanel, TypeObj.Water));
             base.Initialize();
         }
 
@@ -42,6 +47,7 @@ namespace GameHack
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             background.LoadContent(Content, spriteBatch);
+            panel.LoadContent(Content, spriteBatch);
             // TODO: use this.Content to load your game content here
         }
 
@@ -63,6 +69,7 @@ namespace GameHack
         {
             // TODO: Add your update logic here
             background.Update(gameTime);
+            panel.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -75,6 +82,7 @@ namespace GameHack
             GraphicsDevice.Clear(Color.DarkCyan);
             // TODO: Add your drawing code here
             background.Draw();
+            panel.Draw();
             base.Draw(gameTime);
         }
     }

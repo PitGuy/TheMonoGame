@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Content;
 namespace GameHack.Items
 {
     public class WaterObject : ItemObj    {
+        string path = "block";
         public WaterObject(Rectangle rectangle, StatusObj status, TypeObj type)
         {
             this.rectangle = rectangle;
@@ -19,7 +20,11 @@ namespace GameHack.Items
             this.type = type;
             this.type = TypeObj.Water;
         }
-
+        public Rectangle RectanglePr
+        {
+            get { return this.rectangle; }
+            set { rectangle = value; }
+        }
         public void ChangePosition(int x, int y)
         {
             this.rectangle.X = x;
@@ -45,18 +50,25 @@ namespace GameHack.Items
 
         public override void Draw()
         {
+            spriteBatch.Begin();
             spriteBatch.Draw(this.texture, rectangle, Color.White);
+            spriteBatch.End();
         }
 
         public override void LoadContent(ContentManager content, SpriteBatch sp)
         {
             this.spriteBatch = sp;
-            texture = content.Load<Texture2D>("");
+            texture = content.Load<Texture2D>(path);
         }
 
         public override void Update(GameTime gameTime)
         {
             
+        }
+
+        public override void SetRectangle(Rectangle rec)
+        {
+            this.rectangle = rec;
         }
     }
 }
