@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameHack.Register;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameHack
@@ -11,6 +12,7 @@ namespace GameHack
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        Texture2D background;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -38,6 +40,8 @@ namespace GameHack
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            background = Content.Load<Texture2D>(ContentEnum.BackgroundForm.Background);
 
             // TODO: use this.Content to load your game content here
         }
@@ -69,10 +73,11 @@ namespace GameHack
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            GraphicsDevice.Clear(Color.DarkCyan);
             // TODO: Add your drawing code here
-
+            spriteBatch.Begin();
+            spriteBatch.Draw(background, new Vector2(), Color.White);
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
