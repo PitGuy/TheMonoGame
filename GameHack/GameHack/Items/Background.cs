@@ -37,7 +37,7 @@ namespace GameHack.Items
 
         private Rectangle GetMarsPosition()
         {
-            int x = graphicsDevice.PresentationParameters.BackBufferWidth / 16;
+            int x = graphicsDevice.PresentationParameters.BackBufferWidth / 16 * 2;
             int y = graphicsDevice.PresentationParameters.BackBufferHeight / 9;
             int width = graphicsDevice.PresentationParameters.BackBufferWidth / 16 * 9;
             int height = graphicsDevice.PresentationParameters.BackBufferHeight / 9 * 7;

@@ -16,18 +16,9 @@ namespace GameHack.Items
         protected GameTime gameTime;
         protected SpriteBatch spriteBatch;
         protected Texture2D texture;
-        protected Rectangle rectangle;
-        protected ContentManager content;
-        public TypeObj type;
-        public StatusObj status;
-
-        public abstract bool SelectedItem(int x, int y);
+        public Rectangle rectangle;
         public abstract Rectangle GetRectangle();
-        public abstract void SetRectangle(Rectangle rec);
         public abstract void Draw();
-        public abstract void LoadContent(ContentManager content, SpriteBatch sp);
         public abstract void Update(GameTime gameTime);
     }
-    public enum StatusObj { InPanel, Move, InMap }
-    public enum TypeObj { Water, Electricity, Air }
 }
