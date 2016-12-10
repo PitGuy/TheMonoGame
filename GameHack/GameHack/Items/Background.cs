@@ -1,4 +1,5 @@
 ﻿using GameHack.Interfaces;
+using GameHack.Register;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -14,27 +15,30 @@ namespace GameHack.Items
     {
         Texture2D backgroundTexture;
         SpriteBatch spriteBatch;
-        GameTime gameTime;
+        GraphicsDevice graphicsDevice;
 
-        public Background(SpriteBatch sp, GameTime gt)
+        public Background(GraphicsDevice gd)
         {
-            spriteBatch = sp;
-            gameTime = gt;
+            graphicsDevice = gd;
         }
 
         public void Draw()
         {
-            throw new NotImplementedException();
+            spriteBatch.Begin();
+            spriteBatch.Draw(backgroundTexture, new Rectangle(0,0, graphicsDevice.DisplayMode.Width, graphicsDevice.DisplayMode.Height), Color.White);
+            spriteBatch.End();
         }
 
-        public void LoadContent(ContentManager content)
+        public void LoadContent(ContentManager content, SpriteBatch sp)
         {
-            backgroundTexture = content.Load<Texture2D>();
+            backgroundTexture = content.Load<Texture2D>(ContentEnum.BACKGROUND);
+            spriteBatch = sp;
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
-            throw new NotImplementedException();
+
         }
+        
     }
 }

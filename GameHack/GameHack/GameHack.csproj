@@ -100,6 +100,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Engine\SpriteBatchSingelton.cs" />
     <Compile Include="GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
@@ -119,7 +120,7 @@
     <None Include="GameHack_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\background.png" />
+    <Content Include="Content\background.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

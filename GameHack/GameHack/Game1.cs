@@ -1,4 +1,5 @@
-﻿using GameHack.Register;
+﻿using GameHack.Items;
+using GameHack.Register;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -12,7 +13,7 @@ namespace GameHack
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        Texture2D background;
+        Background background;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -28,7 +29,7 @@ namespace GameHack
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            background = new Background(GraphicsDevice);
             base.Initialize();
         }
 
@@ -40,9 +41,7 @@ namespace GameHack
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            background = Content.Load<Texture2D>(ContentEnum.BackgroundForm.Background);
-
+            background.LoadContent(Content, spriteBatch);
             // TODO: use this.Content to load your game content here
         }
 
@@ -63,7 +62,7 @@ namespace GameHack
         protected override void Update(GameTime gameTime)
         {
             // TODO: Add your update logic here
-
+            background.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -75,9 +74,7 @@ namespace GameHack
         {
             GraphicsDevice.Clear(Color.DarkCyan);
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
-            spriteBatch.Draw(background, new Vector2(), Color.White);
-            spriteBatch.End();
+            background.Draw();
             base.Draw(gameTime);
         }
     }

@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace GameHack.Register
 {
-    static class ContentEnum
+    public static class ContentEnum
     {
-        enum BackgroundForm
-        {
-            Background = "background"
-        }
+        public const string BACKGROUND = "background";
     }
 }
