@@ -9,5 +9,6 @@ namespace GameHack.Register
     public static class ContentEnum
     {
         public const string BACKGROUND = "background";
+        public const string STAR = "star";
     }
 }
