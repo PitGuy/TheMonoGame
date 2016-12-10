@@ -69,7 +69,7 @@ namespace GameHack.Items
             {
                 ItemObj it = item;
                 x_n =  x + change_x;
-                y_n =  y + change_y + height_n*indexItem;
+                y_n =  y + change_y + height_n;
                 if (width_n == 0) width_n = width - change_x;
                 if (height_n == 0) height_n = height / countItem - change_y;
 
@@ -85,6 +85,7 @@ namespace GameHack.Items
             SetSizeItem();
             spriteBatch.Begin();
             spriteBatch.Draw(this.texture, GetPanelPosition(), Color.White);
+            rectangle = GetPanelPosition();
             spriteBatch.End();
             foreach (var item in this.items)
             {
