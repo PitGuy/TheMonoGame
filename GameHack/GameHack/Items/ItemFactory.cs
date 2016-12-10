@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using GameHack.Register;
 
 namespace GameHack.Items
 {
@@ -31,7 +32,7 @@ namespace GameHack.Items
         List<ItemObj> readyItem;
         ItemObj buffer;
 
-        public ItemFactory(Panel pn, SpriteBatch sp, GraphicsDevice gd, Rectangle grd)
+        public ItemFactory(Panel pn, GraphicsDevice gd, Rectangle grd)
         {
             waterItems = new List<ItemObj>();
             elecItems = new List<ItemObj>();
@@ -40,31 +41,30 @@ namespace GameHack.Items
 
             panel = pn;
             grid = grd;
-            spriteBatch = sp;
             graphicsDevice = gd;
         }
 
-        public ItemObj crateRandomObject()
+        public ItemObj createRandomObject()
         {
             ItemObj item;
             switch(new Random().Next(1, 15))
             {
-                case 1: item = new WaterObject(waterTexture); break;
-                case 2: item = new WaterObject(waterTexture); break;
-                case 3: item = new WaterObject(waterTexture); break;
-                case 4: item = new WaterObject(waterTexture); break;
-                case 5: item = new WaterObject(waterTexture); break;
-                case 6: item = new WaterObject(waterTexture); break;
-                case 7: item = new WaterObject(waterTexture); break;
-                case 8: item = new WaterObject(waterTexture); break;
-                case 9: item = new WaterObject(waterTexture); break;
-                case 10: item = new WaterObject(waterTexture); break;
-                case 11: item = new WaterObject(waterTexture); break;
-                case 12: item = new WaterObject(waterTexture); break;
-                case 13: item = new WaterObject(waterTexture); break;
-                case 14: item = new WaterObject(waterTexture); break;
-                case 15: item = new WaterObject(waterTexture); break;
-                default: item = new WaterObject(waterTexture); break;
+                case 1: item = new WaterObject(waterTexture, spriteBatch); break;
+                case 2: item = new WaterObject(waterTexture, spriteBatch); break;
+                case 3: item = new WaterObject(waterTexture, spriteBatch); break;
+                case 4: item = new WaterObject(waterTexture, spriteBatch); break;
+                case 5: item = new WaterObject(waterTexture, spriteBatch); break;
+                case 6: item = new WaterObject(waterTexture, spriteBatch); break;
+                case 7: item = new WaterObject(waterTexture, spriteBatch); break;
+                case 8: item = new WaterObject(waterTexture, spriteBatch); break;
+                case 9: item = new WaterObject(waterTexture, spriteBatch); break;
+                case 10: item = new WaterObject(waterTexture, spriteBatch); break;
+                case 11: item = new WaterObject(waterTexture, spriteBatch); break;
+                case 12: item = new WaterObject(waterTexture, spriteBatch); break;
+                case 13: item = new WaterObject(waterTexture, spriteBatch); break;
+                case 14: item = new WaterObject(waterTexture, spriteBatch); break;
+                case 15: item = new WaterObject(waterTexture, spriteBatch); break;
+                default: item = new WaterObject(waterTexture, spriteBatch); break;
             }
             return item;
         }
@@ -75,14 +75,19 @@ namespace GameHack.Items
             spriteBatch.Begin();
             foreach(ItemObj item in readyItem)
             {
-                
+                item.Draw();
             }
             spriteBatch.End();
         }
 
         public void LoadContent(ContentManager content, SpriteBatch sp)
         {
-
+            waterTexture = content.Load<Texture2D>(ContentEnum.BLOCK);
+            spriteBatch = sp;
+            
+            readyItem.Add(createRandomObject());
+            readyItem.Add(createRandomObject());
+            readyItem.Add(createRandomObject());
         }
 
         public void Update(GameTime gameTime)

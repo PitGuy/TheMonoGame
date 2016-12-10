@@ -17,7 +17,6 @@ namespace GameHack.Items
         protected SpriteBatch spriteBatch;
         protected Texture2D texture;
         public Rectangle rectangle;
-        public abstract Rectangle GetRectangle();
         public abstract void Draw();
         public abstract void Update(GameTime gameTime);
     }

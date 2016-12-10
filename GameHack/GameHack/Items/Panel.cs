@@ -31,13 +31,13 @@ namespace GameHack.Items
 
         public void Draw()
         {
-            //SetSizeItem();
+            spriteBatch.Begin();
             spriteBatch.Draw(this.texture, GetPanelPosition(), Color.White);
             foreach(var item in this.items)
             {
                 item.Draw();
             }
-
+            spriteBatch.End();
         }
 
         public Rectangle GetPanelPosition()
@@ -57,7 +57,6 @@ namespace GameHack.Items
 
         public void Update(GameTime gameTime)
         {
-            throw new NotImplementedException();
         }
     }
 }

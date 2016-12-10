@@ -12,13 +12,10 @@ using Microsoft.Xna.Framework.Content;
 namespace GameHack.Items
 {
     public class WaterObject : ItemObj    {
-        string path = "block";
-        public WaterObject(Rectangle rectangle, StatusObj status, TypeObj type)
+        public WaterObject(Texture2D texture, SpriteBatch sp)
         {
-            this.rectangle = rectangle;
-            this.status = status;
-            this.type = type;
-            this.type = TypeObj.Water;
+            this.texture = texture;
+            spriteBatch = sp;
         }
         public Rectangle RectanglePr
         {
@@ -35,40 +32,24 @@ namespace GameHack.Items
             this.rectangle.Width = width;
             this.rectangle.Height = height;
         }
-
-        public override bool SelectedItem(int x, int y)
+        
+        public bool SelectedItem(int x, int y)
         {
             return (x >= this.rectangle.X && x <= (this.rectangle.X + this.rectangle.Width)) 
                     &&
                     y>=this.rectangle.Y && y <= (this.rectangle.Y + this.rectangle.Height);
         }
-
-        public override Rectangle GetRectangle()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public override void Draw()
         {
-            spriteBatch.Begin();
             spriteBatch.Draw(this.texture, rectangle, Color.White);
-            spriteBatch.End();
         }
-
-        public override void LoadContent(ContentManager content, SpriteBatch sp)
-        {
-            this.spriteBatch = sp;
-            texture = content.Load<Texture2D>(path);
-        }
+        
 
         public override void Update(GameTime gameTime)
         {
             
-        }
-
-        public override void SetRectangle(Rectangle rec)
-        {
-            this.rectangle = rec;
         }
     }
 }
