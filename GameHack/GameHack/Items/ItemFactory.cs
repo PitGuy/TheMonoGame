@@ -43,6 +43,12 @@ namespace GameHack.Items
         List<ItemObj> oxyItems;
         List<ItemObj> readyItem;
         private ItemObj buffer;
+        private SunItem sun;
+
+        private int heightSun = 0;
+        private int widthSun = 0;
+
+        bool intersecSun = false;
         public ItemObj Buffer
         {
             get { return buffer; }
@@ -219,8 +225,17 @@ namespace GameHack.Items
                 this.clickedLeftMouseClick = false;
                 this.clickedRightMouseClick = false;
             }
-            
-            
+            else if (this.SelectedItem(this.sun.rectangle, mouseState.X, mouseState.Y))
+            {
+                buffer = null;
+                for (int i = 0; i < readyItem.Count; i++)
+                {
+                    if (readyItem[i].Texture == fakeTexture)
+                    {
+                        readyItem[i] = createRandomObject();
+                    }
+                }
+            }
         }
 
         bool touch(Rectangle a, List<ItemObj> b)
@@ -269,6 +284,18 @@ namespace GameHack.Items
                 this.Buffer.rectangle.Width = mouseRC.Width;
                 this.Buffer.rectangle.Height = mouseRC.Height;
             }
+            /*if (this.SelectedItem(this.sun.rectangle, mouseState.X, mouseState.Y) && !this.intersecSun)
+            {
+                this.sun.rectangle.Height += 20;
+                this.sun.rectangle.Width += 20;
+                this.intersecSun = true;
+
+            }
+            else { 
+                this.sun.rectangle.Height = this.heightSun;
+                this.sun.rectangle.Width = this.widthSun;
+                this.intersecSun = false;
+            }*/
         }
 
         #endregion
@@ -284,6 +311,7 @@ namespace GameHack.Items
         {
             SetSizePanelItem();
             spriteBatch.Begin();
+            sun.Draw();
             foreach (WaterObject item in waterItems)
             {
                 item.DrawNew();
@@ -321,6 +349,10 @@ namespace GameHack.Items
             readyItem.Add(createRandomObject());
             readyItem.Add(createRandomObject());
             readyItem.Add(createRandomObject());
+            this.sun = new SunItem(new Rectangle(100, 100, 100, 100), sp);
+            this.heightSun = sun.rectangle.Height;
+            this.widthSun = sun.rectangle.Width;
+            this.sun.LoadContent(content, sp);
         }
 
         private void SetSizePanelItem()

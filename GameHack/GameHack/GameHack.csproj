@@ -115,6 +115,7 @@
     <Compile Include="Items\Panel.cs" />
     <Compile Include="Items\EleObject.cs" />
     <Compile Include="Items\OxyObject.cs" />
+    <Compile Include="Items\SunItem.cs" />
     <Compile Include="Items\WaterObject.cs" />
     <Compile Include="MenuPage.xaml.cs">
       <DependentUpon>MenuPage.xaml</DependentUpon>
@@ -152,6 +153,7 @@
     <Content Include="Content\ramka.png" />
     <Content Include="Content\star.png" />
     <Content Include="Content\Start.png" />
+    <Content Include="Content\sun.png" />
     <Content Include="Content\Vertical1.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
