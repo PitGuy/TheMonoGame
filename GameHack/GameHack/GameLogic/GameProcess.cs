@@ -17,31 +17,40 @@ namespace GameHack.GameLogic
             GameOver = 1,
         }
 
-        public Status succesValidation(ItemObj [][]objectList, int startElX, int startElY)
+        public Status succesValidation(ItemObj [,]objectList, int startElX, int startElY)
         {
             int currentElX = startElX;
             int currentELY = startElY;
-            ItemObj currentObj = objectList[currentElX][currentELY];
+            ItemObj currentObj = objectList[currentElX,currentELY];
 
-            while(!IsLastListElement)
+            while (!IsLastListElement)
             {
-                if (currentObj.rightPoint && objectList[currentElX + 1][currentELY].leftPoint)
+                if (currentObj != null && currentObj.rightPoint && objectList[currentElX + 1,currentELY].leftPoint &&
+                    currentObj.GetType() ==  objectList[currentElX + 1, currentELY].GetType())
                 {
-                    currentObj = objectList[currentElX + 1][currentELY]; 
+                    currentObj = objectList[currentElX + 1, currentELY];
+                    currentObj.leftPoint = false;
                 }
-                if (currentObj.leftPoint && objectList[currentElX - 1][currentELY].rightPoint)
+                if (currentObj != null && currentObj.leftPoint && objectList[currentElX - 1, currentELY].rightPoint &&
+                    currentObj.GetType() == objectList[currentElX - 1, currentELY].GetType())
                 {
-                    currentObj = objectList[currentElX - 1][currentELY];
+                    currentObj = objectList[currentElX - 1, currentELY];
+                    currentObj.rightPoint = false;
                 }
-                if (currentObj.upPoint && objectList[currentElX][currentELY - 1].downPoint)
+                if (currentObj != null && currentObj.upPoint && objectList[currentElX, currentELY - 1].downPoint &&
+                    currentObj.GetType() == objectList[currentELY - 1, currentELY].GetType())
                 {
-                    currentObj = objectList[currentElX][currentELY - 1];
+                    currentObj = objectList[currentElX, currentELY - 1];
+                    currentObj.downPoint = false;
                 }
-                if (currentObj.downPoint && objectList[currentElX][currentELY + 1].upPoint)
+                if (currentObj != null && currentObj.downPoint && objectList[currentElX, currentELY + 1].upPoint &&
+                    currentObj.GetType() == objectList[currentELY + 1, currentELY].GetType())
                 {
-                    currentObj = objectList[currentElX][currentELY + 1];
+                    currentObj = objectList[currentElX, currentELY + 1];
+                    currentObj.upPoint = false;
                 }
-                if (currentObj.rightPoint && objectList[currentElX + 1][currentELY].IsFinallyObj)
+                if (currentObj != null && currentObj.rightPoint && objectList[currentElX + 1, currentELY].IsFinallyObj &&
+                    currentObj.GetType() == objectList[currentElX + 1, currentELY].GetType())
                 {
                     IsLastListElement = true;
                 }
