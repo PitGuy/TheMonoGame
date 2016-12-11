@@ -16,12 +16,6 @@ namespace GameHack.Register
         public const string MAINFIELDOBJ = "mainFieldObj";
         public const string FAKE = "Empty";
         public const string EXIT = "ear";
-        public const string OXYG = "oxyG";
-        public const string OXYV = "oxyV";
-        public const string OXYLD = "oxyLD";
-        public const string OXYLT = "oxyRT";
-        public const string OXYRT = "oxyLT";
-        public const string OXYRD = "oxyRD";
         public const string ELECTRONIC1 = "Electric1";
         public const string ELECTRONIC2 = "Electroni2";
         public const string ELECTRONIC3 = "Electroni3";
@@ -34,6 +28,12 @@ namespace GameHack.Register
         public const string OXY4 = "4";
         public const string OXY5 = "5";
         public const string OXY6 = "6";
+        public const string WOT1 = "w1";
+        public const string WOT2 = "w2";
+        public const string WOT3 = "w3";
+        public const string WOT4 = "w4";
+        public const string WOT5 = "w5";
+        public const string WOT6 = "w6";
         public const string START = "start";
         public const string SUN = "sun";
     }

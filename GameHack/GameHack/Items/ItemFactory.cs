@@ -21,12 +21,12 @@ namespace GameHack.Items
         SpriteBatch spriteBatch;
         GraphicsDevice graphicsDevice;
 
-        Texture2D waterTextureG;
-        Texture2D waterTexture;
-        Texture2D waterTextureAng1;
-        Texture2D waterTextureAng2;
-        Texture2D waterTextureAng3;
-        Texture2D waterTextureAng4;
+        Texture2D waterTexture1;
+        Texture2D waterTexture2;
+        Texture2D waterTexture3;
+        Texture2D waterTexture4;
+        Texture2D waterTexture5;
+        Texture2D waterTexture6;
         Texture2D elecTexture1;
         Texture2D elecTexture2;
         Texture2D elecTexture3;
@@ -83,20 +83,14 @@ namespace GameHack.Items
         {
             ItemObj item;
             Random rand = new Random();
-            switch (rand.Next(1,24))
+            switch (rand.Next(7,24))
             {
-                case 1: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 2: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 3: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 4: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 5: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 6: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 7: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 8: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 9: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 10: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 11: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 12: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 7: item = new WaterObject(waterTexture1, spriteBatch, graphicsDevice, sizeX, sizeY, ); break;
+                case 8: item = new WaterObject(waterTexture2, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 9: item = new WaterObject(waterTexture3, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 10: item = new WaterObject(waterTexture4, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 11: item = new WaterObject(waterTexture4, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 12: item = new WaterObject(waterTexture4, spriteBatch, graphicsDevice, sizeX, sizeY); break;
                 case 13: item = new EleObject(elecTexture1, spriteBatch, graphicsDevice, sizeX, sizeY); break;
                 case 14: item = new EleObject(elecTexture2, spriteBatch, graphicsDevice, sizeX, sizeY); break;
                 case 15: item = new EleObject(elecTexture3, spriteBatch, graphicsDevice, sizeX, sizeY); break;
@@ -347,13 +341,18 @@ namespace GameHack.Items
 
         public void LoadContent(ContentManager content, SpriteBatch sp)
         {
-            waterTexture = content.Load<Texture2D>(ContentEnum.BLOCK);
-            oxyTextureG = content.Load<Texture2D>(ContentEnum.OXYG);
-            oxyTextureV = content.Load<Texture2D>(ContentEnum.OXYV);
-            oxyTextureAng1 = content.Load<Texture2D>(ContentEnum.OXYLD);
-            oxyTextureAng2 = content.Load<Texture2D>(ContentEnum.OXYLT);
-            oxyTextureAng3 = content.Load<Texture2D>(ContentEnum.OXYRT);
-            oxyTextureAng4 = content.Load<Texture2D>(ContentEnum.OXYRD);
+            waterTexture1 = content.Load<Texture2D>(ContentEnum.WOT1);
+            waterTexture2 = content.Load<Texture2D>(ContentEnum.WOT2);
+            waterTexture3 = content.Load<Texture2D>(ContentEnum.WOT3);
+            waterTexture4 = content.Load<Texture2D>(ContentEnum.WOT4);
+            waterTexture5 = content.Load<Texture2D>(ContentEnum.WOT5);
+            waterTexture6 = content.Load<Texture2D>(ContentEnum.WOT6);
+            oxyTextureG = content.Load<Texture2D>(ContentEnum.OXY1);
+            oxyTextureV = content.Load<Texture2D>(ContentEnum.OXY2);
+            oxyTextureAng1 = content.Load<Texture2D>(ContentEnum.OXY3);
+            oxyTextureAng2 = content.Load<Texture2D>(ContentEnum.OXY4);
+            oxyTextureAng3 = content.Load<Texture2D>(ContentEnum.OXY5);
+            oxyTextureAng4 = content.Load<Texture2D>(ContentEnum.OXY6);
             elecTexture1 = content.Load<Texture2D>(ContentEnum.ELECTRONIC1);
             elecTexture2 = content.Load<Texture2D>(ContentEnum.ELECTRONIC2);
             elecTexture3 = content.Load<Texture2D>(ContentEnum.ELECTRONIC3);

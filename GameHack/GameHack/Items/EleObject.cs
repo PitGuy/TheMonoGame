@@ -12,15 +12,19 @@ using Microsoft.Xna.Framework.Content;
 namespace GameHack.Items
 {
     public class EleObject : ItemObj    {
-        public EleObject(Texture2D texture, SpriteBatch sp, GraphicsDevice gd, int sX, int sY)
+        public EleObject(Texture2D texture, SpriteBatch sp, GraphicsDevice gd, int sX, int sY, bool up, bool down, bool left, bool right)
         {
             oldsizeX = sX;
             oldsizeY = sY;
             this.texture = texture;
             spriteBatch = sp;
             this.GraphicsDevice = gd;
+            this.leftPoint = left;
+            this.rightPoint = right;
+            this.upPoint = up;
+            this.downPoint = down;
         }
-        
+
 
         public EleObject() { }
         public Rectangle RectanglePr
@@ -38,7 +42,7 @@ namespace GameHack.Items
         {
             Texture2D texture = default(Texture2D);
             texture = obj.Texture;
-            EleObject copy = new EleObject(texture, obj.SpriteBatch, obj.graphicsDevice, obj.oldsizeX, obj.oldsizeY);
+            EleObject copy = new EleObject(texture, obj.SpriteBatch, obj.graphicsDevice, obj.oldsizeX, obj.oldsizeY, obj.upPoint, obj.downPoint, obj.leftPoint, obj.rightPoint);
             copy.rectangle = new Rectangle(obj.rectangle.X, obj.rectangle.Y, obj.rectangle.Width, obj.rectangle.Height);
             return copy;
         }
@@ -46,7 +50,7 @@ namespace GameHack.Items
         {
             Texture2D _texture = default(Texture2D);
             _texture = texture;
-            EleObject copy = new EleObject(_texture, obj.SpriteBatch, obj.graphicsDevice, obj.oldsizeX, obj.oldsizeY);
+            EleObject copy = new EleObject(texture, obj.SpriteBatch, obj.graphicsDevice, obj.oldsizeX, obj.oldsizeY, obj.upPoint, obj.downPoint, obj.leftPoint, obj.rightPoint);
             copy.rectangle = new Rectangle(obj.rectangle.X, obj.rectangle.Y, obj.rectangle.Width, obj.rectangle.Height);
             return copy;
         }
