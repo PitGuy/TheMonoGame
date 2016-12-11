@@ -2,6 +2,7 @@
 using GameHack.Register;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace GameHack
 {
@@ -10,6 +11,8 @@ namespace GameHack
     /// </summary>
     public class Game1 : Game
     {
+        MouseState mouseState;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Panel panel;
@@ -20,6 +23,7 @@ namespace GameHack
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            this.IsMouseVisible = true;
         }
 
         /// <summary>
@@ -34,6 +38,7 @@ namespace GameHack
             background = new Background(GraphicsDevice);
             panel = new Panel(GraphicsDevice);
             factory = new ItemFactory(panel, GraphicsDevice, new Rectangle());
+            this.mouseState = Mouse.GetState();
             base.Initialize();
         }
 
@@ -68,8 +73,13 @@ namespace GameHack
         protected override void Update(GameTime gameTime)
         {
             // TODO: Add your update logic here
+            this.mouseState = Mouse.GetState();
             background.Update(gameTime);
             panel.Update(gameTime);
+            factory.Update(gameTime, Content);
+            factory.RightMouseClick(mouseState);
+            factory.LeftMouseClick(mouseState);
+            factory.MouseMove(mouseState);
             base.Update(gameTime);
         }
 

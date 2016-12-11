@@ -13,6 +13,7 @@ namespace GameHack.Interfaces
     {
         void LoadContent(ContentManager content, SpriteBatch sp);
         void Update(GameTime gameTime);
+        void Update(GameTime gameTime, ContentManager content);
         void Draw();
     }
 }

@@ -58,5 +58,10 @@ namespace GameHack.Items
         public void Update(GameTime gameTime)
         {
         }
+
+        public void Update(GameTime gameTime, ContentManager content)
+        {
+            
+        }
     }
 }

@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using GameHack.Register;
 using Windows.Devices.Input;
+using Microsoft.Xna.Framework.Input;
 
 namespace GameHack.Items
 {
@@ -17,7 +18,7 @@ namespace GameHack.Items
         Panel panel;
         Rectangle grid;
 
-        SpriteBatch spriteBatch;
+        SpriteBatch spriteBatch; 
         GraphicsDevice graphicsDevice;
 
         Texture2D waterTexture;
@@ -26,12 +27,17 @@ namespace GameHack.Items
         Texture2D elecTextureAng;
         Texture2D oxyTexture;
         Texture2D oxyTextureAng;
+        Texture2D fakeTexture;
 
         List<ItemObj> waterItems;
         List<ItemObj> elecItems;
         List<ItemObj> oxyItems;
         List<ItemObj> readyItem;
         ItemObj buffer;
+        ItemObj fakeItem;
+
+        bool cancelMoveItem = false;
+        bool isSelect = false;
 
         public ItemFactory(Panel pn, GraphicsDevice gd, Rectangle grd)
         {
@@ -48,7 +54,7 @@ namespace GameHack.Items
         public ItemObj createRandomObject()
         {
             ItemObj item;
-            switch(new Random().Next(1, 15))
+            switch (new Random().Next(1, 15))
             {
                 case 1: item = new WaterObject(waterTexture, spriteBatch); break;
                 case 2: item = new WaterObject(waterTexture, spriteBatch); break;
@@ -72,18 +78,50 @@ namespace GameHack.Items
 
         #region[Events]
 
-        public void MouseClick(Object sender, MouseEventArgs e)
+        public void LeftMouseClick(MouseState mouseState)
         {
-            int mouseX = e.MouseDelta.X;
-            int mouseY = e.MouseDelta.Y;
-            foreach(var item in readyItem)
+            if (mouseState.LeftButton == ButtonState.Pressed)
             {
-                if(this.SelectedItem(item.rectangle, mouseX, mouseY))
+                int mouseX = mouseState.X;
+                int mouseY = mouseState.Y;
+                List<ItemObj> newReadyItem = new List<ItemObj>();
+                foreach (var item in readyItem)
                 {
-                    this.buffer = item;
+                    if (this.SelectedItem(item.rectangle, mouseX, mouseY))
+                    {
+                        this.buffer = item;
+                        if (item is WaterObject)
+                        {
+                            fakeItem = new WaterObject(waterTexture, spriteBatch);
+                        }
+                        newReadyItem.Add(fakeItem);
+                        this.cancelMoveItem = false;
+                        this.isSelect = true;
+                    }
+                    else
+                    {
+                        newReadyItem.Add(item);
+                    }
                 }
+                readyItem = newReadyItem;
             }
-            readyItem.Remove(this.buffer);
+        }
+        public void RightMouseClick(MouseState mouseState)
+        {
+            if (this.buffer != null && mouseState.RightButton == ButtonState.Pressed)
+            {
+                this.fakeItem = this.buffer;
+                this.cancelMoveItem = true;
+                this.isSelect = false;
+            }
+        }
+        public void MouseMove(MouseState mouseState)
+        {
+            if (!this.cancelMoveItem && this.buffer != null)
+            {
+                this.buffer.rectangle.X = mouseState.X;
+                this.buffer.rectangle.Y = mouseState.Y;
+            }
         }
 
         #endregion
@@ -99,9 +137,13 @@ namespace GameHack.Items
         {
             SetSizePanelItem();
             spriteBatch.Begin();
-            foreach(ItemObj item in readyItem)
+            foreach (ItemObj item in readyItem)
             {
                 item.Draw();
+            }
+            if (!this.cancelMoveItem && buffer != null)
+            {
+                buffer.Draw();
             }
             spriteBatch.End();
         }
@@ -110,15 +152,20 @@ namespace GameHack.Items
         {
             waterTexture = content.Load<Texture2D>(ContentEnum.BLOCK);
             spriteBatch = sp;
-            
-            readyItem.Add(createRandomObject());
-            readyItem.Add(createRandomObject());
-            readyItem.Add(createRandomObject());
+            if (!isSelect)
+            {
+                readyItem.Add(createRandomObject());
+                readyItem.Add(createRandomObject());
+                readyItem.Add(createRandomObject());
+            }
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, ContentManager Content)
         {
-
+            /*if (fakeItem != null && Content != null)
+            {
+                fakeItem.ReLoadTexture(Content.Load<Texture2D>(ContentEnum.Fake));
+            }*/
         }
 
         private void SetSizePanelItem()
@@ -154,6 +201,11 @@ namespace GameHack.Items
                 resetItems.Add(it);
             }
             readyItem = resetItems;
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            
         }
     }
 }

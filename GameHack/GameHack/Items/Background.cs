@@ -56,7 +56,11 @@ namespace GameHack.Items
         {
             starts.Update(gameTime);
         }
-        
+
+        public void Update(GameTime gameTime, ContentManager content)
+        {
+            
+        }
     }
 
     class Star : IGameObject
@@ -112,6 +116,11 @@ namespace GameHack.Items
                 else
                     stars.Add(new Rectangle(x, 0, size, size));
             }
+        }
+
+        public void Update(GameTime gameTime, ContentManager content)
+        {
+            
         }
     }
 }
