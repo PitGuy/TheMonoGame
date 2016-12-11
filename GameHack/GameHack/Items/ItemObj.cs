@@ -24,7 +24,7 @@ namespace GameHack.Items
         public bool downPoint;
         public bool IsFinallyObj;
         protected GraphicsDevice graphicsDevice;
-
+        public int startDrow = 0;
 
         public Texture2D Texture{ get { return texture; } set { texture = value; } }
         public SpriteBatch SpriteBatch { get { return spriteBatch; } set { spriteBatch = value; } }

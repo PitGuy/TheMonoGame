@@ -28,24 +28,28 @@ namespace GameHack.GameLogic
                 if (currentObj != null && currentObj.rightPoint && objectList[currentElX + 1,currentELY].leftPoint &&
                     currentObj.GetType() ==  objectList[currentElX + 1, currentELY].GetType())
                 {
+                    currentObj.startDrow = 200;
                     currentObj = objectList[currentElX + 1, currentELY];
                     currentObj.leftPoint = false;
                 }
                 if (currentObj != null && currentObj.leftPoint && objectList[currentElX - 1, currentELY].rightPoint &&
                     currentObj.GetType() == objectList[currentElX - 1, currentELY].GetType())
                 {
+                    currentObj.startDrow = 200;
                     currentObj = objectList[currentElX - 1, currentELY];
                     currentObj.rightPoint = false;
                 }
                 if (currentObj != null && currentObj.upPoint && objectList[currentElX, currentELY - 1].downPoint &&
                     currentObj.GetType() == objectList[currentELY - 1, currentELY].GetType())
                 {
+                    currentObj.startDrow = 200;
                     currentObj = objectList[currentElX, currentELY - 1];
                     currentObj.downPoint = false;
                 }
                 if (currentObj != null && currentObj.downPoint && objectList[currentElX, currentELY + 1].upPoint &&
                     currentObj.GetType() == objectList[currentELY + 1, currentELY].GetType())
                 {
+                    currentObj.startDrow = 200;
                     currentObj = objectList[currentElX, currentELY + 1];
                     currentObj.upPoint = false;
                 }

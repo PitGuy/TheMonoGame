@@ -69,6 +69,15 @@ namespace GameHack.Items
         bool clickedRightMouseClick = false;
         bool clickedLeftMouseClickBuilt = false;
 
+        WaterObject startWater;
+        WaterObject endWater;
+
+        EleObject eleStart;
+        EleObject eleEnd;
+
+        OxyObject oxyStart;
+        OxyObject oxyEnd;
+
         public ItemFactory(Panel pn, GraphicsDevice gd, Rectangle grd)
         {
             rand = new Random();
@@ -88,8 +97,8 @@ namespace GameHack.Items
             ItemObj item;
             switch (rand.Next(1, 7))
             {
-                case 1: item = new WaterObject(waterTexture6, spriteBatch, graphicsDevice, sizeX, sizeY, false, false, true, true); break;
-                case 2: item = new WaterObject(waterTexture6, spriteBatch, graphicsDevice, sizeX, sizeY, false, false, true, true); break;
+                case 1: item = new WaterObject(waterTexture5, spriteBatch, graphicsDevice, sizeX, sizeY, false, false, true, true); break;
+                case 2: item = new WaterObject(waterTexture6, spriteBatch, graphicsDevice, sizeX, sizeY, true, true, false, false); break;
                 case 3: item = new WaterObject(waterTexture1, spriteBatch, graphicsDevice, sizeX, sizeY, true, false, false, true); break;
                 case 4: item = new WaterObject(waterTexture2, spriteBatch, graphicsDevice, sizeX, sizeY, true, false, true, false); break;
                 case 5: item = new WaterObject(waterTexture3, spriteBatch, graphicsDevice, sizeX, sizeY, false, true, false, true); break;
@@ -407,6 +416,36 @@ namespace GameHack.Items
             readyItem.Add(createRandomWatterObject());
             readyItem.Add(createRandomEleObject());
             readyItem.Add(createRandomOxyObject());
+
+            startWater = new WaterObject(waterTexture5, spriteBatch, graphicsDevice, 30, 30, false, false, true, true);
+            startWater.rectangle = new Rectangle(420, 300, 30, 30);
+            endWater = new WaterObject(waterTexture5, spriteBatch, graphicsDevice, 30, 30, false, false, true, true);
+            endWater.rectangle = new Rectangle(840, 480, 30, 30);
+            endWater.IsFinallyObj = true;
+            waterItems.Add(startWater);
+            waterItems.Add(endWater);
+            arrItem[0, 0] = startWater;
+            arrItem[14, 6] = endWater;
+
+            eleStart = new EleObject(elecTexture1, spriteBatch, graphicsDevice, 30, 30, false, false, true, true);
+            eleStart.rectangle = new Rectangle(420, 390, 30, 30);
+            eleEnd = new EleObject(elecTexture1, spriteBatch, graphicsDevice, 30, 30, false, false, true, true);
+            eleEnd.rectangle = new Rectangle(840, 390, 30, 30);
+            eleEnd.IsFinallyObj = true;
+            elecItems.Add(eleStart);
+            elecItems.Add(eleEnd);
+            arrItem[0, 4] = eleStart;
+            arrItem[14, 3] = eleEnd;
+
+            oxyStart = new OxyObject(oxyTextureG, spriteBatch, graphicsDevice, 30, 30, false, false, true, true);
+            oxyStart.rectangle = new Rectangle(420, 480, 30, 30);
+            oxyEnd = new OxyObject(oxyTextureG, spriteBatch, graphicsDevice, 30, 30, false, false, true, true);
+            oxyEnd.rectangle = new Rectangle(840, 330, 30, 30);
+            oxyEnd.IsFinallyObj = true;
+            oxyItems.Add(oxyStart);
+            oxyItems.Add(oxyEnd);
+            arrItem[0, 7] = oxyStart;
+            arrItem[14, 1] = oxyEnd;
         }
 
         private void SetSizePanelItem()
