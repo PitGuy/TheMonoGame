@@ -1,4 +1,5 @@
-﻿using GameHack.Interfaces;
+﻿using GameHack.GameLogic;
+using GameHack.Interfaces;
 using GameHack.Register;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -20,8 +21,12 @@ namespace GameHack.Items
         SpriteBatch spriteBatch;
         GraphicsDevice graphicsDevice;
 
+        Texture2D textureResult;
+        Rectangle rectangleResult;
+
         ExitItem exit;
         StartItem run;
+        ContentManager content;
 
         int heightExitImage = 0;
         int widthExitImage = 0;
@@ -50,12 +55,13 @@ namespace GameHack.Items
         {
             int mouseX = mouseState.X;
             int mouseY = mouseState.Y;
-            
+
             if (this.SelectedItem(exit.rectangle, mouseX, mouseY))
             {
-                if (!moveMouseOnExit) {
-                    exit.rectangle.Height +=20;
-                    exit.rectangle.Width +=20;
+                if (!moveMouseOnExit)
+                {
+                    exit.rectangle.Height += 20;
+                    exit.rectangle.Width += 20;
                     moveMouseOnExit = true;
                 }
             }
@@ -63,7 +69,7 @@ namespace GameHack.Items
             {
                 exit.rectangle.Height = heightExitImage;
                 exit.rectangle.Width = widthExitImage;
-                moveMouseOnExit = false ;
+                moveMouseOnExit = false;
             }
         }
         public void LeftMouseClick_Exit(MouseState mouseState)
@@ -112,7 +118,8 @@ namespace GameHack.Items
             {
                 if (this.SelectedItem(run.rectangle, mouseX, mouseY))
                 {
-                    
+                    GameProcess.Status status = GameProcess.succesValidation(ItemFactory.arrItem, 8, 6);
+                    Draw(status);
                 }
             }
         }
@@ -122,11 +129,25 @@ namespace GameHack.Items
         public void Draw()
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(backgroundTexture, new Rectangle(0,0, graphicsDevice.PresentationParameters.BackBufferWidth, graphicsDevice.PresentationParameters.BackBufferHeight), Color.White);
+            spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, graphicsDevice.PresentationParameters.BackBufferWidth, graphicsDevice.PresentationParameters.BackBufferHeight), Color.White);
             starts.Draw();
             spriteBatch.Draw(marsTexture, GetMarsPosition(), Color.White);
             exit.Draw();
             run.Draw();
+            spriteBatch.End();
+        }
+        public void Draw(GameProcess.Status status)
+        {
+            if (status == GameProcess.Status.Ok)
+            {
+                this.textureResult = content.Load<Texture2D>(ContentEnum.STATUS_OK);
+            }
+            else
+            {
+                this.textureResult = content.Load<Texture2D>(ContentEnum.STATUS_NO);
+            }
+            spriteBatch.Begin();
+            spriteBatch.Draw(textureResult, new Rectangle(100,100,100,100),Color.White);
             spriteBatch.End();
         }
 
@@ -141,11 +162,12 @@ namespace GameHack.Items
 
         public void LoadContent(ContentManager content, SpriteBatch sp)
         {
+            this.content = content;
             backgroundTexture = content.Load<Texture2D>(ContentEnum.BACKGROUND);
             marsTexture = content.Load<Texture2D>(ContentEnum.MARS);
             starts.LoadContent(content, sp);
             spriteBatch = sp;
-            exit = new ExitItem(new Rectangle(graphicsDevice.PresentationParameters.BackBufferWidth-50*3, graphicsDevice.PresentationParameters.BackBufferHeight/10, 50, 50), sp);
+            exit = new ExitItem(new Rectangle(graphicsDevice.PresentationParameters.BackBufferWidth - 50 * 3, graphicsDevice.PresentationParameters.BackBufferHeight / 10, 50, 50), sp);
 
             run = new StartItem(new Rectangle(graphicsDevice.PresentationParameters.BackBufferWidth - 50 * 5, graphicsDevice.PresentationParameters.BackBufferHeight / 10, 50, 50), sp);
 
@@ -171,7 +193,7 @@ namespace GameHack.Items
 
         public void Update(GameTime gameTime, ContentManager content)
         {
-            
+
         }
     }
 
@@ -219,13 +241,13 @@ namespace GameHack.Items
             {
                 stars.Remove(rm);
             }
-            if(new Random().Next(0,10) == 0)
+            if (new Random().Next(0, 10) == 0)
             {
                 Random rand = new Random();
                 int size = rand.Next(25, 25);
 
                 int x = rand.Next(1, 10);
-                if(x > 5)
+                if (x > 5)
                     stars.Add(new Rectangle(1600, rand.Next(1, 9) * 100, size, size));
                 else
                     stars.Add(new Rectangle(x * rand.Next(10, 300), 0, size, size));
