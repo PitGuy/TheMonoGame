@@ -235,6 +235,8 @@ namespace GameHack.Items
                         readyItem[i] = createRandomObject();
                     }
                 }
+                this.clickedLeftMouseClick = false;
+                this.clickedRightMouseClick = false;
             }
         }
 
