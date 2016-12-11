@@ -13,7 +13,6 @@ namespace GameHack.Register
         public const string MARS = "mars";
 		public const string PANEL = "ramka";
         public const string BLOCK = "Vertical1";
-        public const string MAINFIELDOBJ = "mainFieldObj";
         public const string FAKE = "Empty";
         public const string EXIT = "ear";
         public const string ELECTRONIC1 = "Electric1";
@@ -36,5 +35,6 @@ namespace GameHack.Register
         public const string WOT6 = "w6";
         public const string START = "start";
         public const string SUN = "sun";
+        public const string MAINFIELDOBJ = "mainFieldObj";
     }
 }

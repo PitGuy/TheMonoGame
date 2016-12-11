@@ -19,8 +19,6 @@ namespace GameHack.Items
         private Texture2D texture;
 
         private List<ItemObj> items;
-        private ItemObj bufforItem;
-        private int countItem;
        
         public Panel(GraphicsDevice graphicsDevice)
         {

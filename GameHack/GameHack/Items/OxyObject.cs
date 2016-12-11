@@ -12,15 +12,19 @@ using Microsoft.Xna.Framework.Content;
 namespace GameHack.Items
 {
     public class OxyObject : ItemObj    {
-        public OxyObject(Texture2D texture, SpriteBatch sp, GraphicsDevice gd, int sX, int sY)
+        public OxyObject(Texture2D texture, SpriteBatch sp, GraphicsDevice gd, int sX, int sY, bool up, bool down, bool left, bool right)
         {
             oldsizeX = sX;
             oldsizeY = sY;
             this.texture = texture;
             spriteBatch = sp;
             this.GraphicsDevice = gd;
+            this.leftPoint = left;
+            this.rightPoint = right;
+            this.upPoint = up;
+            this.downPoint = down;
         }
-        
+
 
         public OxyObject() { }
         public Rectangle RectanglePr
@@ -38,7 +42,7 @@ namespace GameHack.Items
         {
             Texture2D texture = default(Texture2D);
             texture = obj.Texture;
-            OxyObject copy = new OxyObject(texture, obj.SpriteBatch, obj.graphicsDevice, obj.oldsizeX, obj.oldsizeY);
+            OxyObject copy = new OxyObject(texture, obj.SpriteBatch, obj.graphicsDevice, obj.oldsizeX, obj.oldsizeY, obj.upPoint, obj.downPoint, obj.leftPoint, obj.rightPoint);
             copy.rectangle = new Rectangle(obj.rectangle.X, obj.rectangle.Y, obj.rectangle.Width, obj.rectangle.Height);
             return copy;
         }
@@ -46,7 +50,7 @@ namespace GameHack.Items
         {
             Texture2D _texture = default(Texture2D);
             _texture = texture;
-            OxyObject copy = new OxyObject(_texture, obj.SpriteBatch, obj.graphicsDevice, obj.oldsizeX, obj.oldsizeY);
+            OxyObject copy = new OxyObject(texture, obj.SpriteBatch, obj.graphicsDevice, obj.oldsizeX, obj.oldsizeY, obj.upPoint, obj.downPoint, obj.leftPoint, obj.rightPoint);
             copy.rectangle = new Rectangle(obj.rectangle.X, obj.rectangle.Y, obj.rectangle.Width, obj.rectangle.Height);
             return copy;
         }
@@ -59,11 +63,11 @@ namespace GameHack.Items
         
         public int sizeX
         {
-            get { return (int)((Double)50 * ((Double)graphicsDevice.PresentationParameters.BackBufferWidth / 1600)); }
+            get { return (int)((Double)30 * ((Double)graphicsDevice.PresentationParameters.BackBufferWidth / 1600)); }
         }
         public int sizeY
         {
-            get { return (int)((Double)50 * ((Double)graphicsDevice.PresentationParameters.BackBufferHeight / 900)); }
+            get { return (int)((Double)30 * ((Double)graphicsDevice.PresentationParameters.BackBufferHeight / 900)); }
         }
         public int oldsizeX;
         public int oldsizeY;

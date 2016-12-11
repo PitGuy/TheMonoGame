@@ -63,11 +63,11 @@ namespace GameHack.Items
         
         public int sizeX
         {
-            get { return (int)((Double)50 * ((Double)graphicsDevice.PresentationParameters.BackBufferWidth / 1600)); }
+            get { return (int)((Double)30 * ((Double)graphicsDevice.PresentationParameters.BackBufferWidth / 1600)); }
         }
         public int sizeY
         {
-            get { return (int)((Double)50 * ((Double)graphicsDevice.PresentationParameters.BackBufferHeight / 900)); }
+            get { return (int)((Double)30 * ((Double)graphicsDevice.PresentationParameters.BackBufferHeight / 900)); }
         }
         public int oldsizeX;
         public int oldsizeY;

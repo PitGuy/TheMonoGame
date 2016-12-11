@@ -15,6 +15,8 @@ namespace GameHack.Items
 {
     public class ItemFactory : IGameObject
     {
+        Random rand;
+
         Panel panel;
         Rectangle grid;
 
@@ -41,7 +43,7 @@ namespace GameHack.Items
         Texture2D oxyTextureAng4;
         Texture2D fakeTexture;
 
-        ItemObj[,] arrItem = new ItemObj[8,6];
+        ItemObj[,] arrItem = new ItemObj[15,10];
         List<ItemObj> waterItems;
         List<ItemObj> elecItems;
         List<ItemObj> oxyItems;
@@ -69,6 +71,8 @@ namespace GameHack.Items
 
         public ItemFactory(Panel pn, GraphicsDevice gd, Rectangle grd)
         {
+            rand = new Random();
+
             waterItems = new List<ItemObj>();
             elecItems = new List<ItemObj>();
             oxyItems = new List<ItemObj>();
@@ -79,49 +83,68 @@ namespace GameHack.Items
             graphicsDevice = gd;
         }
 
-        public ItemObj createRandomObject()
+        public ItemObj createRandomWatterObject()
         {
             ItemObj item;
-            Random rand = new Random();
-            switch (rand.Next(7,24))
+            switch (rand.Next(1, 7))
             {
-                case 7: item = new WaterObject(waterTexture1, spriteBatch, graphicsDevice, sizeX, sizeY, ); break;
-                case 8: item = new WaterObject(waterTexture2, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 9: item = new WaterObject(waterTexture3, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 10: item = new WaterObject(waterTexture4, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 11: item = new WaterObject(waterTexture4, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 12: item = new WaterObject(waterTexture4, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 13: item = new EleObject(elecTexture1, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 14: item = new EleObject(elecTexture2, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 15: item = new EleObject(elecTexture3, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 16: item = new EleObject(elecTexture4, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 17: item = new EleObject(elecTexture5, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 18: item = new EleObject(elecTexture6, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 19: item = new OxyObject(oxyTextureG, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 20: item = new OxyObject(oxyTextureV, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 21: item = new OxyObject(oxyTextureAng1, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 22: item = new OxyObject(oxyTextureAng2, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 23: item = new OxyObject(oxyTextureAng3, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 24: item = new OxyObject(oxyTextureAng4, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 1: item = new WaterObject(waterTexture6, spriteBatch, graphicsDevice, sizeX, sizeY, false, false, true, true); break;
+                case 2: item = new WaterObject(waterTexture6, spriteBatch, graphicsDevice, sizeX, sizeY, false, false, true, true); break;
+                case 3: item = new WaterObject(waterTexture1, spriteBatch, graphicsDevice, sizeX, sizeY, true, false, false, true); break;
+                case 4: item = new WaterObject(waterTexture2, spriteBatch, graphicsDevice, sizeX, sizeY, true, false, true, false); break;
+                case 5: item = new WaterObject(waterTexture3, spriteBatch, graphicsDevice, sizeX, sizeY, false, true, false, true); break;
+                case 6: item = new WaterObject(waterTexture4, spriteBatch, graphicsDevice, sizeX, sizeY, false, true, true, false); break;
+                case 7: item = new WaterObject(waterTexture5, spriteBatch, graphicsDevice, sizeX, sizeY, false, false, true, true); break;
                 default: item = null; break;
             }
             return item;
         }
-
+        public ItemObj createRandomEleObject()
+        {
+            ItemObj item;
+            switch (rand.Next(1, 7))
+            {
+                case 1: item = new EleObject(elecTexture1, spriteBatch, graphicsDevice, sizeX, sizeY, false, false, true , true); break;
+                case 2: item = new EleObject(elecTexture2, spriteBatch, graphicsDevice, sizeX, sizeY, true, true, false, false); break;
+                case 4: item = new EleObject(elecTexture3, spriteBatch, graphicsDevice, sizeX, sizeY, false, true, false, true); break;
+                case 5: item = new EleObject(elecTexture4, spriteBatch, graphicsDevice, sizeX, sizeY, false, true, true, false); break;
+                case 6: item = new EleObject(elecTexture1, spriteBatch, graphicsDevice, sizeX, sizeY, false, false, true, true); break;
+                case 7: item = new EleObject(elecTexture5, spriteBatch, graphicsDevice, sizeX, sizeY, true, false, true, false); break;
+                case 3: item = new EleObject(elecTexture6, spriteBatch, graphicsDevice, sizeX, sizeY, true, false, false, true); break;
+                default: item = null; break;
+            }
+            return item;
+        }
+        public ItemObj createRandomOxyObject()
+        {
+            ItemObj item;
+            switch (rand.Next(1, 7))
+            {
+                case 1: item = new OxyObject(oxyTextureG, spriteBatch, graphicsDevice, sizeX, sizeY, false, false, true, true); break;
+                case 2: item = new OxyObject(oxyTextureV, spriteBatch, graphicsDevice, sizeX, sizeY, true, true, false, false); break;
+                case 3: item = new OxyObject(oxyTextureAng1, spriteBatch, graphicsDevice, sizeX, sizeY, false, true, true, false); break;
+                case 4: item = new OxyObject(oxyTextureAng2, spriteBatch, graphicsDevice, sizeX, sizeY, false, true, false, true); break;
+                case 5: item = new OxyObject(oxyTextureAng3, spriteBatch, graphicsDevice, sizeX, sizeY, true, false, true, false); break;
+                case 6: item = new OxyObject(oxyTextureAng4, spriteBatch, graphicsDevice, sizeX, sizeY, true, false, false, true); break;
+                case 7: item = new OxyObject(oxyTextureG, spriteBatch, graphicsDevice, sizeX, sizeY, false, false, true, true); break;
+                default: item = null; break;
+            }
+            return item;
+        }
         public int sizeX
         {
-            get { return (int)((Double)50 * ((Double)graphicsDevice.PresentationParameters.BackBufferWidth / 1600)); }
+            get { return (int)((Double)30 * ((Double)graphicsDevice.PresentationParameters.BackBufferWidth / 1600)); }
         }
         public int sizeY
         {
-            get { return (int)((Double)50 * ((Double)graphicsDevice.PresentationParameters.BackBufferHeight / 900)); }
+            get { return (int)((Double)30 * ((Double)graphicsDevice.PresentationParameters.BackBufferHeight / 900)); }
         }
         #region[Events]
         Rectangle get_position_mouse(MouseState mouse)
         {
             int x = mouse.Position.X;
             int y = mouse.Position.Y;
-            if (x > graphicsDevice.PresentationParameters.BackBufferWidth / 16 * 4 / sizeX * sizeX + sizeX && x < graphicsDevice.PresentationParameters.BackBufferWidth / 16 * 4 / sizeX * sizeX + 9 * sizeX && y > graphicsDevice.PresentationParameters.BackBufferHeight / 9 * 3 / sizeY * sizeY && y < graphicsDevice.PresentationParameters.BackBufferHeight / 9 * 3 / sizeY * sizeY + 6 * sizeY)
+            if (x > graphicsDevice.PresentationParameters.BackBufferWidth / 16 * 4 / sizeX * sizeX + sizeX && x < graphicsDevice.PresentationParameters.BackBufferWidth / 16 * 6 / sizeX * sizeX + 9 * sizeX && y > graphicsDevice.PresentationParameters.BackBufferHeight / 9 * 3 / sizeY * sizeY && y < graphicsDevice.PresentationParameters.BackBufferHeight / 9 * 4 / sizeY * sizeY + 7 * sizeY)
             {
                 x = x / sizeX * sizeX;
                 y = y / sizeY * sizeY;
@@ -132,15 +155,15 @@ namespace GameHack.Items
         {
             int x = mouse.Position.X;
             int y = mouse.Position.Y;
-            int newX = (x - graphicsDevice.PresentationParameters.BackBufferWidth / 16 * 4 / sizeX * sizeX - sizeX) / 50;
-            int newY = (y - graphicsDevice.PresentationParameters.BackBufferHeight / 9 * 3 / sizeY * sizeY) /50;
+            int newX = (x - graphicsDevice.PresentationParameters.BackBufferWidth / 16 * 4 / sizeX * sizeX - sizeX) / 30;
+            int newY = (y - graphicsDevice.PresentationParameters.BackBufferHeight / 9 * 3 / sizeY * sizeY) /30;
             return new Point(newX, newY);
         }
         Boolean get_position_mouseCheck(MouseState mouse)
         {
             int x = mouse.Position.X;
             int y = mouse.Position.Y;
-            if (x > graphicsDevice.PresentationParameters.BackBufferWidth / 16 * 4 / sizeX * sizeX + sizeX && x < graphicsDevice.PresentationParameters.BackBufferWidth / 16 * 4 / sizeX * sizeX + 9 * sizeX && y > graphicsDevice.PresentationParameters.BackBufferHeight / 9 * 3 / sizeY * sizeY && y < graphicsDevice.PresentationParameters.BackBufferHeight / 9 * 3 / sizeY * sizeY + 6 * sizeY)
+            if (x > graphicsDevice.PresentationParameters.BackBufferWidth / 16 * 4 / sizeX * sizeX + sizeX && x < graphicsDevice.PresentationParameters.BackBufferWidth / 16 * 6 / sizeX * sizeX + 9 * sizeX && y > graphicsDevice.PresentationParameters.BackBufferHeight / 9 * 3 / sizeY * sizeY && y < graphicsDevice.PresentationParameters.BackBufferHeight / 9 * 4 / sizeY * sizeY + 7 * sizeY)
             {
                 return true;
             }
@@ -215,7 +238,12 @@ namespace GameHack.Items
                 {
                     if(readyItem[i].Texture == fakeTexture)
                     {
-                        readyItem[i] = createRandomObject();
+                        if(readyItem[i] is WaterObject)
+                        readyItem[i] = createRandomWatterObject();
+                        else if (readyItem[i] is EleObject)
+                            readyItem[i] = createRandomEleObject();
+                        else if (readyItem[i] is OxyObject)
+                            readyItem[i] = createRandomOxyObject();
                     }
                 }
                 this.clickedLeftMouseClickBuilt = true;
@@ -230,7 +258,12 @@ namespace GameHack.Items
                 {
                     if (readyItem[i].Texture == fakeTexture)
                     {
-                        readyItem[i] = createRandomObject();
+                        if (readyItem[i] is WaterObject)
+                            readyItem[i] = createRandomWatterObject();
+                        else if (readyItem[i] is EleObject)
+                            readyItem[i] = createRandomEleObject();
+                        else if (readyItem[i] is OxyObject)
+                            readyItem[i] = createRandomOxyObject();
                     }
                 }
                 this.clickedLeftMouseClick = false;
@@ -367,13 +400,13 @@ namespace GameHack.Items
             oxyTextureAng4 = content.Load<Texture2D>(ContentEnum.OXY5);
             fakeTexture = content.Load<Texture2D>(ContentEnum.FAKE);
             spriteBatch = sp;
-            readyItem.Add(createRandomObject());
-            readyItem.Add(createRandomObject());
-            readyItem.Add(createRandomObject());
             this.sun = new SunItem(new Rectangle(100, 100, 100, 100), sp);
             this.heightSun = sun.rectangle.Height;
             this.widthSun = sun.rectangle.Width;
             this.sun.LoadContent(content, sp);
+            readyItem.Add(createRandomWatterObject());
+            readyItem.Add(createRandomEleObject());
+            readyItem.Add(createRandomOxyObject());
         }
 
         private void SetSizePanelItem()

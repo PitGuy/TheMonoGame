@@ -18,8 +18,8 @@ namespace GameHack.Items
         List<Rectangle> mainFieldFramesColumns;
         SpriteBatch spriteBatch;
         GraphicsDevice graphicsDevice;
-        const int frameCountWidth = 8;
-        const int frameCountHeight = 6;
+        const int frameCountWidth = 15;
+        const int frameCountHeight = 10;
         int startIndexX;
         int startIndexY;
 
@@ -29,8 +29,8 @@ namespace GameHack.Items
         {
             graphicsDevice = gd;
 
-            sizeOfPlaceX = 50;
-            sizeOfPlaceY = 50;
+            sizeOfPlaceX = 30;
+            sizeOfPlaceY = 30;
         }
 
         public void Draw()
@@ -71,8 +71,8 @@ namespace GameHack.Items
                 startIndexYCopy += sizeOfPlaceY;
             }
 
-            sizeOfPlaceX = (int)((Double)50 * ((Double)graphicsDevice.PresentationParameters.BackBufferWidth / 1600));
-            sizeOfPlaceY = (int)((Double)50 * ((Double)graphicsDevice.PresentationParameters.BackBufferHeight / 900));
+            sizeOfPlaceX = (int)((Double)30 * ((Double)graphicsDevice.PresentationParameters.BackBufferWidth / 1600));
+            sizeOfPlaceY = (int)((Double)30 * ((Double)graphicsDevice.PresentationParameters.BackBufferHeight / 900));
         }
     }
 }
