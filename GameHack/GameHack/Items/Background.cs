@@ -138,16 +138,17 @@ namespace GameHack.Items
         }
        /* public void Draw(GameProcess.Status status)
         {
+            spriteBatch.Begin();
             if (status == GameProcess.Status.Ok)
             {
-                this.textureResult = content.Load<Texture2D>(ContentEnum.STATUS_OK);
+                spriteBatch.DrawString(content.Load<SpriteFont>("Score"), "You are WINNER", new Vector2(100, 100), Color.Black);
             }
             else
             {
-                this.textureResult = content.Load<Texture2D>(ContentEnum.STATUS_NO);
+                spriteBatch.DrawString(content.Load<SpriteFont>("Score"), "Game Over", new Vector2(100, 100), Color.Black);
             }
-            spriteBatch.Begin();
-            spriteBatch.Draw(textureResult, new Rectangle(0,0,100,100),Color.White);
+           
+           
             spriteBatch.End();
         }*/
 
