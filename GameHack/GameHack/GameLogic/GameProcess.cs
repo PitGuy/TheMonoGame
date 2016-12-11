@@ -10,8 +10,7 @@ namespace GameHack.GameLogic
 {
     public class GameProcess
     {
-        public bool IsLastListEl = false;
-        
+        public bool IsLastListElement = false;      
         public enum Status
         {
             Ok = 0,
@@ -24,7 +23,7 @@ namespace GameHack.GameLogic
             int currentELY = startElY;
             ItemObj currentObj = objectList[currentElX][currentELY];
 
-            while(!IsLastListEl)
+            while(!IsLastListElement)
             {
                 if (currentObj.rightPoint && objectList[currentElX + 1][currentELY].leftPoint)
                 {
