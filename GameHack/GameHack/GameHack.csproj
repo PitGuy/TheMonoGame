@@ -128,6 +128,7 @@
   <ItemGroup>
     <Content Include="Content\background.jpg" />
     <Content Include="Content\block.png" />
+    <Content Include="Content\mainFieldObj.png" />
     <Content Include="Content\mars.png" />
     <Content Include="Content\panel.png" />
     <Content Include="Content\panel.png" />

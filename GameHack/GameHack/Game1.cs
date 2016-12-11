@@ -12,7 +12,7 @@ namespace GameHack
     public class Game1 : Game
     {
         MouseState mouseState;
-
+        MainField mainField;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Panel panel;
@@ -38,6 +38,7 @@ namespace GameHack
             background = new Background(GraphicsDevice);
             panel = new Panel(GraphicsDevice);
             factory = new ItemFactory(panel, GraphicsDevice, new Rectangle());
+            mainField = new MainField(GraphicsDevice);
             this.mouseState = Mouse.GetState();
             base.Initialize();
         }
@@ -51,6 +52,7 @@ namespace GameHack
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             background.LoadContent(Content, spriteBatch);
+            mainField.LoadContent(Content, spriteBatch);
             panel.LoadContent(Content, spriteBatch);
             factory.LoadContent(Content, spriteBatch);
             // TODO: use this.Content to load your game content here
@@ -75,8 +77,8 @@ namespace GameHack
             // TODO: Add your update logic here
             this.mouseState = Mouse.GetState();
             background.Update(gameTime);
+            mainField.Update(gameTime);
             panel.Update(gameTime);
-            factory.Update(gameTime, Content);
             factory.RightMouseClick(mouseState);
             factory.LeftMouseClick(mouseState);
             factory.MouseMove(mouseState);
@@ -92,6 +94,7 @@ namespace GameHack
             GraphicsDevice.Clear(Color.DarkCyan);
             // TODO: Add your drawing code here
             background.Draw();
+            mainField.Draw();
             panel.Draw();
             factory.Draw();
             base.Draw(gameTime);

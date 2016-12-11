@@ -51,10 +51,5 @@ namespace GameHack.Items
         {
             
         }
-
-        public override void ReLoadTexture(Texture2D texture)
-        {
-            this.texture = texture;
-        }
     }
 }

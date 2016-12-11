@@ -70,10 +70,5 @@ namespace GameHack.Items
                 startIndexY += 50;
             }
         }
-
-        public void Update(GameTime gameTime, ContentManager content)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

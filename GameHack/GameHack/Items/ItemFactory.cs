@@ -18,7 +18,7 @@ namespace GameHack.Items
         Panel panel;
         Rectangle grid;
 
-        SpriteBatch spriteBatch; 
+        SpriteBatch spriteBatch;
         GraphicsDevice graphicsDevice;
 
         Texture2D waterTexture;
@@ -92,7 +92,7 @@ namespace GameHack.Items
                         this.buffer = item;
                         if (item is WaterObject)
                         {
-                            fakeItem = new WaterObject(waterTexture, spriteBatch);
+                            fakeItem = new WaterObject(fakeTexture, spriteBatch);
                         }
                         newReadyItem.Add(fakeItem);
                         this.cancelMoveItem = false;
@@ -151,21 +151,11 @@ namespace GameHack.Items
         public void LoadContent(ContentManager content, SpriteBatch sp)
         {
             waterTexture = content.Load<Texture2D>(ContentEnum.BLOCK);
+            fakeTexture = content.Load<Texture2D>(ContentEnum.Fake);
             spriteBatch = sp;
-            if (!isSelect)
-            {
-                readyItem.Add(createRandomObject());
-                readyItem.Add(createRandomObject());
-                readyItem.Add(createRandomObject());
-            }
-        }
-
-        public void Update(GameTime gameTime, ContentManager Content)
-        {
-            /*if (fakeItem != null && Content != null)
-            {
-                fakeItem.ReLoadTexture(Content.Load<Texture2D>(ContentEnum.Fake));
-            }*/
+            readyItem.Add(createRandomObject());
+            readyItem.Add(createRandomObject());
+            readyItem.Add(createRandomObject());
         }
 
         private void SetSizePanelItem()
@@ -205,7 +195,7 @@ namespace GameHack.Items
 
         public void Update(GameTime gameTime)
         {
-            
+
         }
     }
 }

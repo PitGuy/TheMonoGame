@@ -19,6 +19,5 @@ namespace GameHack.Items
         public Rectangle rectangle;
         public abstract void Draw();
         public abstract void Update(GameTime gameTime);
-        public abstract void ReLoadTexture(Texture2D texture);
     }
 }

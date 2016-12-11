@@ -117,10 +117,5 @@ namespace GameHack.Items
                     stars.Add(new Rectangle(x, 0, size, size));
             }
         }
-
-        public void Update(GameTime gameTime, ContentManager content)
-        {
-            
-        }
     }
 }
