@@ -1,6 +1,5 @@
 ﻿using GameHack.Interfaces;
 using GameHack.Register;
-using GameHack.Setup;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -19,21 +18,19 @@ namespace GameHack.Items
         List<Rectangle> mainFieldFramesColumns;
         SpriteBatch spriteBatch;
         GraphicsDevice graphicsDevice;
-        const int frameCountWidth = 16;
-        const int frameCountHeight = 8;
-        int centerX;
-        int centerY;
+        const int frameCountWidth = 8;
+        const int frameCountHeight = 6;
+        int startIndexX;
+        int startIndexY;
 
-        Sizes size = new Sizes();
+        int sizeOfPlaceX;
+        int sizeOfPlaceY;
         public MainField(GraphicsDevice gd)
         {
             graphicsDevice = gd;
-            size.frameHeight = 50;
-            size.frameWidth = 50;
-            centerX = graphicsDevice.PresentationParameters.BackBufferWidth;
-            centerY = graphicsDevice.PresentationParameters.BackBufferHeight;
-            centerX /= 2;
-            centerY /= 2;
+
+            sizeOfPlaceX = 50;
+            sizeOfPlaceY = 50;
         }
 
         public void Draw()
@@ -41,7 +38,7 @@ namespace GameHack.Items
             spriteBatch.Begin();
             foreach (var mainFieldFramesRaw in mainFieldFramesRaws)
             {
-                //spriteBatch.Draw(mainFieldFrameTexture, mainFieldFramesRaw, Color.White);
+                spriteBatch.Draw(mainFieldFrameTexture, mainFieldFramesRaw, Color.White);
             }
             spriteBatch.End();
         }
@@ -53,22 +50,29 @@ namespace GameHack.Items
         }
         public void Update(GameTime gameTime)
         {
+            startIndexX = graphicsDevice.PresentationParameters.BackBufferWidth;
+            startIndexY = graphicsDevice.PresentationParameters.BackBufferHeight;
+            startIndexX = startIndexX / 16 * 4 / sizeOfPlaceX * sizeOfPlaceX + sizeOfPlaceX;
+            startIndexY = startIndexY / 9 * 3 / sizeOfPlaceY * sizeOfPlaceY;
+
             mainFieldFramesRaws = new List<Rectangle>();
             mainFieldFramesColumns = new List<Rectangle>();
-            int startIndexX = centerX - ((frameCountWidth / 2) * 50);
-            int startIndexY = centerY - ((frameCountHeight / 2) * 50);
-            int startIndexCopy = startIndexX;
+            int startIndexXCopy = startIndexX;
+            int startIndexYCopy = startIndexY;
 
             for (int i = 0; i < frameCountHeight; i++)
             {
                 for (int j = 0; j < frameCountWidth; j++)
                 {
-                    mainFieldFramesRaws.Add(new Rectangle(startIndexX, startIndexY, size.frameWidth, size.frameHeight));
-                    startIndexX += 50;
+                    mainFieldFramesRaws.Add(new Rectangle(startIndexXCopy, startIndexYCopy, sizeOfPlaceX, sizeOfPlaceY));
+                    startIndexXCopy += sizeOfPlaceX;
                 }
-                startIndexX = startIndexCopy;
-                startIndexY += 50;
+                startIndexXCopy = startIndexX;
+                startIndexYCopy += sizeOfPlaceY;
             }
+
+            sizeOfPlaceX = (int)((Double)50 * ((Double)graphicsDevice.PresentationParameters.BackBufferWidth / 1600));
+            sizeOfPlaceY = (int)((Double)50 * ((Double)graphicsDevice.PresentationParameters.BackBufferHeight / 900));
         }
     }
 }

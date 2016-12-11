@@ -115,7 +115,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Register\ContentEnum.cs" />
     <Compile Include="Register\Options.cs" />
-    <Compile Include="Setup\Sizes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="project.json" />

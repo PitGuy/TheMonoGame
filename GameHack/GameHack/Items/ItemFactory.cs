@@ -85,25 +85,31 @@ namespace GameHack.Items
             return item;
         }
 
+        public int sizeX
+        {
+            get { return (int)((Double)50 * ((Double)graphicsDevice.PresentationParameters.BackBufferWidth / 1600)); }
+        }
+        public int sizeY
+        {
+            get { return (int)((Double)50 * ((Double)graphicsDevice.PresentationParameters.BackBufferHeight / 900)); }
+        }
         #region[Events]
         Rectangle get_position_mouse(MouseState mouse)
         {
             int x = mouse.Position.X;
             int y = mouse.Position.Y;
-            if (x > 500 && x < 1100 && y > 300 && y < 600)
+            if (x > graphicsDevice.PresentationParameters.BackBufferWidth / 16 * 4 / sizeX * sizeX + sizeX && x < graphicsDevice.PresentationParameters.BackBufferWidth / 16 * 4 / sizeX * sizeX + 9 * sizeX && y > graphicsDevice.PresentationParameters.BackBufferHeight / 9 * 3 / sizeY * sizeY && y < graphicsDevice.PresentationParameters.BackBufferHeight / 9 * 3 / sizeY * sizeY + 6 * sizeY)
             {
-                while (x % 50 != 0)
-                    x--;
-                while (y % 50 != 0)
-                    y--;
+                x = x / sizeX * sizeX;
+                y = y / sizeY * sizeY;
             }
-            return new Rectangle(x, y, 50, 50);
+            return new Rectangle(x, y, sizeX, sizeY);
         }
         Boolean get_position_mouseCheck(MouseState mouse)
         {
             int x = mouse.Position.X;
             int y = mouse.Position.Y;
-            if (x > 500 && x < 1100 && y > 300 && y < 600)
+            if (x > graphicsDevice.PresentationParameters.BackBufferWidth / 16 * 4 / sizeX * sizeX + sizeX && x < graphicsDevice.PresentationParameters.BackBufferWidth / 16 * 4 / sizeX * sizeX + 9 * sizeX && y > graphicsDevice.PresentationParameters.BackBufferHeight / 9 * 3 / sizeY * sizeY && y < graphicsDevice.PresentationParameters.BackBufferHeight / 9 * 3 / sizeY * sizeY + 6 * sizeY)
             {
                 return true;
             }
