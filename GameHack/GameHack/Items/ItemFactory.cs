@@ -93,6 +93,7 @@ namespace GameHack.Items
                         if (item is WaterObject)
                         {
                             fakeItem = new WaterObject(fakeTexture, spriteBatch);
+                            fakeItem.rectangle = new Rectangle(item.rectangle.X, item.rectangle.Y, item.rectangle.Width, item.rectangle.Height);
                         }
                         newReadyItem.Add(fakeItem);
                         this.cancelMoveItem = false;
