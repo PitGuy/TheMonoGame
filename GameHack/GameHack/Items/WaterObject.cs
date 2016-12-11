@@ -17,6 +17,7 @@ namespace GameHack.Items
             this.texture = texture;
             spriteBatch = sp;
         }
+        public WaterObject() { }
         public Rectangle RectanglePr
         {
             get { return this.rectangle; }
@@ -27,18 +28,29 @@ namespace GameHack.Items
             this.rectangle.X = x;
             this.rectangle.Y = y;
         }
+        #region[Copy]
+        public static WaterObject CopyObject(WaterObject obj)
+        {
+            Texture2D texture = default(Texture2D);
+            texture = obj.Texture;
+            WaterObject copy = new WaterObject(texture, obj.SpriteBatch);
+            copy.rectangle = new Rectangle(obj.rectangle.X, obj.rectangle.Y, obj.rectangle.Width, obj.rectangle.Height);
+            return copy;
+        }
+        public static WaterObject CopyObject(WaterObject obj,Texture2D texture)
+        {
+            Texture2D _texture = default(Texture2D);
+            _texture = texture;
+            WaterObject copy = new WaterObject(_texture, obj.SpriteBatch);
+            copy.rectangle = new Rectangle(obj.rectangle.X, obj.rectangle.Y, obj.rectangle.Width, obj.rectangle.Height);
+            return copy;
+        }
+        #endregion
         public void ChangeSize(int width, int height)
         {
             this.rectangle.Width = width;
             this.rectangle.Height = height;
         }
-        
-        /*public bool SelectedItem(int x, int y)
-        {
-            return (x >= this.rectangle.X && x <= (this.rectangle.X + this.rectangle.Width)) 
-                    &&
-                    y>=this.rectangle.Y && y <= (this.rectangle.Y + this.rectangle.Height);
-        }*/
         
 
         public override void Draw()

@@ -39,6 +39,9 @@ namespace GameHack.Items
         bool cancelMoveItem = false;
         bool isSelect = false;
 
+        bool clickedLeftMouseClick = false;
+        bool clickedRightMouseClick = false;
+
         public ItemFactory(Panel pn, GraphicsDevice gd, Rectangle grd)
         {
             waterItems = new List<ItemObj>();
@@ -80,7 +83,7 @@ namespace GameHack.Items
 
         public void LeftMouseClick(MouseState mouseState)
         {
-            if (mouseState.LeftButton == ButtonState.Pressed)
+            if (mouseState.LeftButton == ButtonState.Pressed && !this.clickedLeftMouseClick)
             {
                 int mouseX = mouseState.X;
                 int mouseY = mouseState.Y;
@@ -89,11 +92,11 @@ namespace GameHack.Items
                 {
                     if (this.SelectedItem(item.rectangle, mouseX, mouseY))
                     {
-                        this.buffer = item;
+                        this.buffer = WaterObject.CopyObject(item as WaterObject);
+
                         if (item is WaterObject)
                         {
-                            fakeItem = new WaterObject(fakeTexture, spriteBatch);
-                            fakeItem.rectangle = new Rectangle(item.rectangle.X, item.rectangle.Y, item.rectangle.Width, item.rectangle.Height);
+                            fakeItem = WaterObject.CopyObject(item as WaterObject, fakeTexture);
                         }
                         newReadyItem.Add(fakeItem);
                         this.cancelMoveItem = false;
@@ -104,16 +107,35 @@ namespace GameHack.Items
                         newReadyItem.Add(item);
                     }
                 }
-                readyItem = newReadyItem;
+                readyItem = new List<ItemObj>();
+                readyItem= newReadyItem;
+                this.clickedLeftMouseClick = true;
+                this.clickedRightMouseClick = false;
             }
         }
         public void RightMouseClick(MouseState mouseState)
         {
-            if (this.buffer != null && mouseState.RightButton == ButtonState.Pressed)
+            if (this.buffer != null && mouseState.RightButton == ButtonState.Pressed && !clickedRightMouseClick)
             {
-                this.fakeItem = this.buffer;
+                //this.fakeItem = this.buffer;
                 this.cancelMoveItem = true;
                 this.isSelect = false;
+                this.fakeItem = null;
+                List<ItemObj> oldreadyItem = new List<ItemObj>();
+                foreach (var item in this.readyItem)
+                {
+                    if (item.Texture == this.fakeTexture)
+                    {
+                        oldreadyItem.Add(buffer);
+                    }
+                    else
+                    {
+                        oldreadyItem.Add(item);
+                    }
+                }
+                this.clickedLeftMouseClick = false;
+                this.clickedRightMouseClick = true;
+                this.readyItem = oldreadyItem;
             }
         }
         public void MouseMove(MouseState mouseState)
