@@ -33,7 +33,12 @@ namespace GameHack.Items
         List<ItemObj> elecItems;
         List<ItemObj> oxyItems;
         List<ItemObj> readyItem;
-        ItemObj buffer;
+        private ItemObj buffer;
+        public ItemObj Buffer
+        {
+            get { return buffer; }
+            set { buffer = value; }
+        }
         ItemObj fakeItem;
 
         bool cancelMoveItem = false;
@@ -41,6 +46,7 @@ namespace GameHack.Items
 
         bool clickedLeftMouseClick = false;
         bool clickedRightMouseClick = false;
+        bool clickedLeftMouseClickBuilt = false;
 
         public ItemFactory(Panel pn, GraphicsDevice gd, Rectangle grd)
         {
@@ -80,10 +86,32 @@ namespace GameHack.Items
         }
 
         #region[Events]
-
+        Rectangle get_position_mouse(MouseState mouse)
+        {
+            int x = mouse.Position.X;
+            int y = mouse.Position.Y;
+            if (x > 500 && x < 1100 && y > 300 && y < 600)
+            {
+                while (x % 50 != 0)
+                    x--;
+                while (y % 50 != 0)
+                    y--;
+            }
+            return new Rectangle(x, y, 50, 50);
+        }
+        Boolean get_position_mouseCheck(MouseState mouse)
+        {
+            int x = mouse.Position.X;
+            int y = mouse.Position.Y;
+            if (x > 500 && x < 1100 && y > 300 && y < 600)
+            {
+                return true;
+            }
+            return false;
+        }
         public void LeftMouseClick(MouseState mouseState)
         {
-            if (mouseState.LeftButton == ButtonState.Pressed && !this.clickedLeftMouseClick)
+            if (mouseState.LeftButton == ButtonState.Pressed && !this.clickedLeftMouseClick && get_position_mouse(mouseState).Intersects(panel.GetPanelPosition()))
             {
                 int mouseX = mouseState.X;
                 int mouseY = mouseState.Y;
@@ -93,6 +121,7 @@ namespace GameHack.Items
                     if (this.SelectedItem(item.rectangle, mouseX, mouseY))
                     {
                         this.buffer = WaterObject.CopyObject(item as WaterObject);
+                        this.Buffer = item;
 
                         if (item is WaterObject)
                         {
@@ -111,13 +140,34 @@ namespace GameHack.Items
                 readyItem= newReadyItem;
                 this.clickedLeftMouseClick = true;
                 this.clickedRightMouseClick = false;
+                this.clickedLeftMouseClickBuilt = false;
             }
+            else if(mouseState.LeftButton == ButtonState.Pressed && this.clickedLeftMouseClick && get_position_mouseCheck(mouseState) && !this.clickedLeftMouseClickBuilt)
+            {
+                ItemObj newItem = WaterObject.CopyObject(buffer as WaterObject);
+                waterItems.Add(newItem);
+                buffer = null;
+                for(int i = 0; i < readyItem.Count; i++)
+                {
+                    if(readyItem[i].Texture == fakeTexture)
+                    {
+                        readyItem[i] = createRandomObject();
+                    }
+                }
+                this.clickedLeftMouseClickBuilt = true;
+
+                this.clickedLeftMouseClick = false;
+                this.clickedRightMouseClick = false;
+            }
+            
+            
         }
         public void RightMouseClick(MouseState mouseState)
         {
             if (this.buffer != null && mouseState.RightButton == ButtonState.Pressed && !clickedRightMouseClick)
             {
                 //this.fakeItem = this.buffer;
+                this.fakeItem = this.Buffer;
                 this.cancelMoveItem = true;
                 this.isSelect = false;
                 this.fakeItem = null;
@@ -140,10 +190,13 @@ namespace GameHack.Items
         }
         public void MouseMove(MouseState mouseState)
         {
-            if (!this.cancelMoveItem && this.buffer != null)
+            if (!this.cancelMoveItem && this.Buffer != null)
             {
-                this.buffer.rectangle.X = mouseState.X;
-                this.buffer.rectangle.Y = mouseState.Y;
+                Rectangle mouseRC = get_position_mouse(mouseState);
+                this.Buffer.rectangle.X = mouseRC.X;
+                this.Buffer.rectangle.Y = mouseRC.Y;
+                this.Buffer.rectangle.Width = mouseRC.Width;
+                this.Buffer.rectangle.Height = mouseRC.Height;
             }
         }
 
@@ -160,13 +213,17 @@ namespace GameHack.Items
         {
             SetSizePanelItem();
             spriteBatch.Begin();
+            foreach (ItemObj item in waterItems)
+            {
+                item.Draw();
+            }
             foreach (ItemObj item in readyItem)
             {
                 item.Draw();
             }
-            if (!this.cancelMoveItem && buffer != null)
+            if (!this.cancelMoveItem && Buffer != null)
             {
-                buffer.Draw();
+                Buffer.Draw();
             }
             spriteBatch.End();
         }
@@ -174,7 +231,7 @@ namespace GameHack.Items
         public void LoadContent(ContentManager content, SpriteBatch sp)
         {
             waterTexture = content.Load<Texture2D>(ContentEnum.BLOCK);
-            fakeTexture = content.Load<Texture2D>(ContentEnum.Fake);
+            fakeTexture = content.Load<Texture2D>(ContentEnum.FAKE);
             spriteBatch = sp;
             readyItem.Add(createRandomObject());
             readyItem.Add(createRandomObject());
@@ -218,7 +275,10 @@ namespace GameHack.Items
 
         public void Update(GameTime gameTime)
         {
-
+            MouseState mouseState = Mouse.GetState();
+            this.RightMouseClick(mouseState);
+            this.LeftMouseClick(mouseState);
+            this.MouseMove(mouseState);
         }
     }
 }

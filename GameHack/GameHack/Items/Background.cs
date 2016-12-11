@@ -107,14 +107,14 @@ namespace GameHack.Items
             {
                 stars.Remove(rm);
             }
-            if(new Random().Next(0,50) == 0)
+            if(new Random().Next(0,10) == 0)
             {
-                int size = new Random().Next(5, 10);
-                int x = new Random().Next(0, 3000);
-                if(x > 1600)
-                    stars.Add(new Rectangle(1600, new Random().Next(0, 18) * 50, size, size));
+                int size = new Random().Next(25, 25);
+                int x = new Random().Next(1, 10);
+                if(x > 5)
+                    stars.Add(new Rectangle(1600, new Random().Next(1, 9) * 100, size, size));
                 else
-                    stars.Add(new Rectangle(x, 0, size, size));
+                    stars.Add(new Rectangle(x * new Random().Next(10, 300), 0, size, size));
             }
         }
     }

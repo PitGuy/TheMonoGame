@@ -75,13 +75,10 @@ namespace GameHack
         protected override void Update(GameTime gameTime)
         {
             // TODO: Add your update logic here
-            this.mouseState = Mouse.GetState();
             background.Update(gameTime);
             mainField.Update(gameTime);
             panel.Update(gameTime);
-            factory.RightMouseClick(mouseState);
-            factory.LeftMouseClick(mouseState);
-            factory.MouseMove(mouseState);
+            factory.Update(gameTime);
             base.Update(gameTime);
         }
 

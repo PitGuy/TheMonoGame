@@ -14,6 +14,6 @@ namespace GameHack.Register
 		public const string PANEL = "panel";
         public const string BLOCK = "Vertical1";
         public const string MAINFIELDOBJ = "mainFieldObj";
-        public const string Fake = "star";
+        public const string FAKE = "star";
     }
 }

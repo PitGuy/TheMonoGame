@@ -41,7 +41,7 @@ namespace GameHack.Items
             spriteBatch.Begin();
             foreach (var mainFieldFramesRaw in mainFieldFramesRaws)
             {
-                spriteBatch.Draw(mainFieldFrameTexture, mainFieldFramesRaw, Color.White);
+                //spriteBatch.Draw(mainFieldFrameTexture, mainFieldFramesRaw, Color.White);
             }
             spriteBatch.End();
         }
