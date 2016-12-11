@@ -1,4 +1,5 @@
 ﻿using GameHack.Interfaces;
+using GameHack.Register;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,6 +18,11 @@ namespace GameHack.Items
         protected SpriteBatch spriteBatch;
         protected Texture2D texture;
         public Rectangle rectangle;
+        public bool leftPoint;
+        public bool rightPoint;
+        public bool upPoint;
+        public bool downPoint;
+
         public Texture2D Texture{ get { return texture; } set { texture = value; } }
         public SpriteBatch SpriteBatch { get { return spriteBatch; } set { spriteBatch = value; } }
         public abstract void Draw();
