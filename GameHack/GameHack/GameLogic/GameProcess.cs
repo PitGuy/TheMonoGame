@@ -10,14 +10,14 @@ namespace GameHack.GameLogic
 {
     public class GameProcess
     {
-        public bool IsLastListElement = false;      
+        public static bool IsLastListElement = false;      
         public enum Status
         {
             Ok = 0,
             GameOver = 1,
         }
 
-        public Status succesValidation(ItemObj [,]objectList, int startElX, int startElY)
+        public static Status succesValidation(ItemObj [,]objectList, int startElX, int startElY)
         {
             int currentElX = startElX;
             int currentELY = startElY;
