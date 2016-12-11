@@ -37,7 +37,7 @@ namespace GameHack.Items
         Texture2D oxyTextureAng4;
         Texture2D fakeTexture;
 
-        ItemObj[,] arrWaterItem = new ItemObj[8,6];
+        ItemObj[,] arrItem = new ItemObj[8,6];
         List<ItemObj> waterItems;
         List<ItemObj> elecItems;
         List<ItemObj> oxyItems;
@@ -72,7 +72,8 @@ namespace GameHack.Items
         public ItemObj createRandomObject()
         {
             ItemObj item;
-            switch (new Random().Next(1, 2))
+            Random rand = new Random();
+            switch (rand.Next(1,24))
             {
                 case 1: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
                 case 2: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
@@ -152,12 +153,23 @@ namespace GameHack.Items
                 {
                     if (this.SelectedItem(item.rectangle, mouseX, mouseY))
                     {
-                        this.buffer = WaterObject.CopyObject(item as WaterObject);
-                        this.Buffer = item;
-
                         if (item is WaterObject)
                         {
+                            this.buffer = WaterObject.CopyObject(item as WaterObject);
+                            this.Buffer = item;
                             fakeItem = WaterObject.CopyObject(item as WaterObject, fakeTexture);
+                        }
+                        else if(item is EleObject)
+                        {
+                            this.buffer = EleObject.CopyObject(item as EleObject);
+                            this.Buffer = item;
+                            fakeItem = EleObject.CopyObject(item as EleObject, fakeTexture);
+                        }
+                        else if (item is OxyObject)
+                        {
+                            this.buffer = OxyObject.CopyObject(item as OxyObject);
+                            this.Buffer = item;
+                            fakeItem = OxyObject.CopyObject(item as OxyObject, fakeTexture);
                         }
                         newReadyItem.Add(fakeItem);
                         this.cancelMoveItem = false;
@@ -176,10 +188,24 @@ namespace GameHack.Items
             }
             else if (mouseState.LeftButton == ButtonState.Pressed && this.clickedLeftMouseClick && get_position_mouseCheck(mouseState) && !this.clickedLeftMouseClickBuilt && !touch(get_position_mouse(mouseState), waterItems))
             {
-                ItemObj newItem = WaterObject.CopyObject(buffer as WaterObject);
-                waterItems.Add(newItem);
+                ItemObj newItem = null;
+                if (buffer is WaterObject)
+                {
+                    newItem = WaterObject.CopyObject(buffer as WaterObject);
+                    waterItems.Add(newItem);
+                }
+                else if (buffer is EleObject)
+                {
+                    newItem = EleObject.CopyObject(buffer as EleObject);
+                    elecItems.Add(newItem);
+                }
+                else if (buffer is OxyObject)
+                {
+                    newItem = OxyObject.CopyObject(buffer as OxyObject);
+                    oxyItems.Add(newItem);
+                }
                 Point point = getIndex(mouseState);
-                arrWaterItem[point.X, point.Y] = newItem;
+                arrItem[point.X, point.Y] = newItem;
                 buffer = null;
                 for(int i = 0; i < readyItem.Count; i++)
                 {
@@ -259,6 +285,14 @@ namespace GameHack.Items
             SetSizePanelItem();
             spriteBatch.Begin();
             foreach (WaterObject item in waterItems)
+            {
+                item.DrawNew();
+            }
+            foreach (EleObject item in elecItems)
+            {
+                item.DrawNew();
+            }
+            foreach (OxyObject item in oxyItems)
             {
                 item.DrawNew();
             }

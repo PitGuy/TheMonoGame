@@ -111,6 +111,7 @@
     <Compile Include="Items\ItemFactory.cs" />
     <Compile Include="Items\ItemObj.cs" />
     <Compile Include="Items\MainField.cs" />
+    <Compile Include="Items\StartItem.cs" />
     <Compile Include="Items\Panel.cs" />
     <Compile Include="Items\EleObject.cs" />
     <Compile Include="Items\OxyObject.cs" />
@@ -150,6 +151,7 @@
     <Content Include="Content\panel.png" />
     <Content Include="Content\ramka.png" />
     <Content Include="Content\star.png" />
+    <Content Include="Content\Start.png" />
     <Content Include="Content\Vertical1.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

@@ -69,11 +69,11 @@ namespace GameHack.Items
         public int oldsizeY;
         public override void Draw()
         {
-            spriteBatch.Draw(this.texture, rectangle, new Rectangle(0, 0, 232, 232), Color.White);
+            spriteBatch.Draw(this.texture, rectangle, new Rectangle(0, 0, 200, 200), Color.White);
         }
         public void DrawNew()
         {
-            spriteBatch.Draw(this.texture, getNewRectangle(rectangle), new Rectangle(0,0, 232, 232), Color.White);
+            spriteBatch.Draw(this.texture, getNewRectangle(rectangle), new Rectangle(0,0, 200, 200), Color.White);
         }
         public Rectangle getNewRectangle(Rectangle oldRe)
         {

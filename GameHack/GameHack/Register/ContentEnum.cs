@@ -22,5 +22,6 @@ namespace GameHack.Register
         public const string OXYLT = "oxyRT";
         public const string OXYRT = "oxyLT";
         public const string OXYRD = "oxyRD";
+        public const string START = "start";
     }
 }

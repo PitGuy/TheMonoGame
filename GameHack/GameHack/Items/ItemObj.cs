@@ -25,6 +25,7 @@ namespace GameHack.Items
         public bool IsFinallyObj;
         protected GraphicsDevice graphicsDevice;
 
+
         public Texture2D Texture{ get { return texture; } set { texture = value; } }
         public SpriteBatch SpriteBatch { get { return spriteBatch; } set { spriteBatch = value; } }
         public GraphicsDevice GraphicsDevice { get { return graphicsDevice; } set { graphicsDevice = value; } }

@@ -221,12 +221,14 @@ namespace GameHack.Items
             }
             if(new Random().Next(0,10) == 0)
             {
-                int size = new Random().Next(25, 25);
-                int x = new Random().Next(1, 10);
+                Random rand = new Random();
+                int size = rand.Next(25, 25);
+
+                int x = rand.Next(1, 10);
                 if(x > 5)
-                    stars.Add(new Rectangle(1600, new Random().Next(1, 9) * 100, size, size));
+                    stars.Add(new Rectangle(1600, rand.Next(1, 9) * 100, size, size));
                 else
-                    stars.Add(new Rectangle(x * new Random().Next(10, 300), 0, size, size));
+                    stars.Add(new Rectangle(x * rand.Next(10, 300), 0, size, size));
             }
         }
     }
