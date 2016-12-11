@@ -127,15 +127,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\background.jpg" />
-<<<<<<< .mine
-    <Content Include="Content\mainFieldObj.png" />
-||||||| .r11
-=======
     <Content Include="Content\block.png" />
     <Content Include="Content\mars.png" />
     <Content Include="Content\panel.png" />
     <Content Include="Content\panel.png" />
     <Content Include="Content\star.png" />
+    <Content Include="Content\Vertical1.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

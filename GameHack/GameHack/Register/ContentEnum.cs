@@ -12,7 +12,8 @@ namespace GameHack.Register
         public const string STAR = "star";
         public const string MARS = "mars";
 		public const string PANEL = "panel";
-        public const string BLOCK = "block";
+        public const string BLOCK = "Vertical1";
         public const string MAINFIELDOBJ = "mainFieldObj";
+        public const string Fake = "star";
     }
 }
