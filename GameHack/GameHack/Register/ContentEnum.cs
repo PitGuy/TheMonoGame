@@ -22,6 +22,18 @@ namespace GameHack.Register
         public const string OXYLT = "oxyRT";
         public const string OXYRT = "oxyLT";
         public const string OXYRD = "oxyRD";
+        public const string ELECTRONIC1 = "Electric1";
+        public const string ELECTRONIC2 = "Electroni2";
+        public const string ELECTRONIC3 = "Electroni3";
+        public const string ELECTRONIC4 = "Electroni4";
+        public const string ELECTRONIC5 = "Electroni5";
+        public const string ELECTRONIC6 = "Electroni6";
+        public const string OXY1 = "1";
+        public const string OXY2 = "2";
+        public const string OXY3 = "3";
+        public const string OXY4 = "4";
+        public const string OXY5 = "5";
+        public const string OXY6 = "6";
         public const string START = "start";
         public const string SUN = "sun";
     }

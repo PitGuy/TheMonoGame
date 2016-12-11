@@ -139,6 +139,12 @@
     <Content Include="Content\background.jpg" />
     <Content Include="Content\block.png" />
     <Content Include="Content\ear.png" />
+    <Content Include="Content\Electric1.png" />
+    <Content Include="Content\Electroni2.png" />
+    <Content Include="Content\Electroni3.png" />
+    <Content Include="Content\Electroni4.png" />
+    <Content Include="Content\Electroni5.png" />
+    <Content Include="Content\Electroni6.png" />
     <Content Include="Content\Empty.png" />
     <Content Include="Content\mainFieldObj.png" />
     <Content Include="Content\mars.png" />

@@ -27,8 +27,12 @@ namespace GameHack.Items
         Texture2D waterTextureAng2;
         Texture2D waterTextureAng3;
         Texture2D waterTextureAng4;
-        Texture2D elecTexture;
-        Texture2D elecTextureAng;
+        Texture2D elecTexture1;
+        Texture2D elecTexture2;
+        Texture2D elecTexture3;
+        Texture2D elecTexture4;
+        Texture2D elecTexture5;
+        Texture2D elecTexture6;
         Texture2D oxyTextureG;
         Texture2D oxyTextureV;
         Texture2D oxyTextureAng1;
@@ -93,12 +97,12 @@ namespace GameHack.Items
                 case 10: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
                 case 11: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
                 case 12: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 13: item = new EleObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 14: item = new EleObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 15: item = new EleObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 16: item = new EleObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 17: item = new EleObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 18: item = new EleObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 13: item = new EleObject(elecTexture1, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 14: item = new EleObject(elecTexture2, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 15: item = new EleObject(elecTexture3, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 16: item = new EleObject(elecTexture4, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 17: item = new EleObject(elecTexture5, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 18: item = new EleObject(elecTexture6, spriteBatch, graphicsDevice, sizeX, sizeY); break;
                 case 19: item = new OxyObject(oxyTextureG, spriteBatch, graphicsDevice, sizeX, sizeY); break;
                 case 20: item = new OxyObject(oxyTextureV, spriteBatch, graphicsDevice, sizeX, sizeY); break;
                 case 21: item = new OxyObject(oxyTextureAng1, spriteBatch, graphicsDevice, sizeX, sizeY); break;
@@ -192,7 +196,7 @@ namespace GameHack.Items
                 readyItem = new List<ItemObj>();
                 readyItem = newReadyItem;
             }
-            else if (mouseState.LeftButton == ButtonState.Pressed && this.clickedLeftMouseClick && get_position_mouseCheck(mouseState) && !this.clickedLeftMouseClickBuilt && !touch(get_position_mouse(mouseState), waterItems))
+            else if (mouseState.LeftButton == ButtonState.Pressed && this.clickedLeftMouseClick && get_position_mouseCheck(mouseState) && !this.clickedLeftMouseClickBuilt && !touch(get_position_mouse(mouseState), waterItems) && !touch(get_position_mouse(mouseState), oxyItems) && !touch(get_position_mouse(mouseState), elecItems))
             {
                 ItemObj newItem = null;
                 if (buffer is WaterObject)
@@ -211,7 +215,7 @@ namespace GameHack.Items
                     oxyItems.Add(newItem);
                 }
                 Point point = getIndex(mouseState);
-                arrItem[point.X, point.Y] = newItem;
+                arrItem[point.X, point.Y > 5 ? point.Y - 1 : point.Y] = newItem;
                 buffer = null;
                 for(int i = 0; i < readyItem.Count; i++)
                 {
@@ -346,6 +350,12 @@ namespace GameHack.Items
             oxyTextureAng2 = content.Load<Texture2D>(ContentEnum.OXYLT);
             oxyTextureAng3 = content.Load<Texture2D>(ContentEnum.OXYRT);
             oxyTextureAng4 = content.Load<Texture2D>(ContentEnum.OXYRD);
+            elecTexture1 = content.Load<Texture2D>(ContentEnum.ELECTRONIC1);
+            elecTexture2 = content.Load<Texture2D>(ContentEnum.ELECTRONIC2);
+            elecTexture3 = content.Load<Texture2D>(ContentEnum.ELECTRONIC3);
+            elecTexture4 = content.Load<Texture2D>(ContentEnum.ELECTRONIC4);
+            elecTexture5 = content.Load<Texture2D>(ContentEnum.ELECTRONIC5);
+            elecTexture6 = content.Load<Texture2D>(ContentEnum.ELECTRONIC6);
             fakeTexture = content.Load<Texture2D>(ContentEnum.FAKE);
             spriteBatch = sp;
             readyItem.Add(createRandomObject());
