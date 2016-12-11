@@ -22,9 +22,11 @@ namespace GameHack.Items
         public bool rightPoint;
         public bool upPoint;
         public bool downPoint;
+        protected GraphicsDevice graphicsDevice;
 
         public Texture2D Texture{ get { return texture; } set { texture = value; } }
         public SpriteBatch SpriteBatch { get { return spriteBatch; } set { spriteBatch = value; } }
+        public GraphicsDevice GraphicsDevice { get { return graphicsDevice; } set { graphicsDevice = value; } }
         public abstract void Draw();
         public abstract void Update(GameTime gameTime);
     }

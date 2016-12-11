@@ -29,6 +29,7 @@ namespace GameHack.Items
         Texture2D oxyTextureAng;
         Texture2D fakeTexture;
 
+        ItemObj[,] arrWaterItem = new ItemObj[8,6];
         List<ItemObj> waterItems;
         List<ItemObj> elecItems;
         List<ItemObj> oxyItems;
@@ -65,22 +66,22 @@ namespace GameHack.Items
             ItemObj item;
             switch (new Random().Next(1, 15))
             {
-                case 1: item = new WaterObject(waterTexture, spriteBatch); break;
-                case 2: item = new WaterObject(waterTexture, spriteBatch); break;
-                case 3: item = new WaterObject(waterTexture, spriteBatch); break;
-                case 4: item = new WaterObject(waterTexture, spriteBatch); break;
-                case 5: item = new WaterObject(waterTexture, spriteBatch); break;
-                case 6: item = new WaterObject(waterTexture, spriteBatch); break;
-                case 7: item = new WaterObject(waterTexture, spriteBatch); break;
-                case 8: item = new WaterObject(waterTexture, spriteBatch); break;
-                case 9: item = new WaterObject(waterTexture, spriteBatch); break;
-                case 10: item = new WaterObject(waterTexture, spriteBatch); break;
-                case 11: item = new WaterObject(waterTexture, spriteBatch); break;
-                case 12: item = new WaterObject(waterTexture, spriteBatch); break;
-                case 13: item = new WaterObject(waterTexture, spriteBatch); break;
-                case 14: item = new WaterObject(waterTexture, spriteBatch); break;
-                case 15: item = new WaterObject(waterTexture, spriteBatch); break;
-                default: item = new WaterObject(waterTexture, spriteBatch); break;
+                case 1: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 2: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 3: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 4: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 5: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 6: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 7: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 8: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 9: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 10: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 11: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 12: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 13: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 14: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 15: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                default: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
             }
             return item;
         }
@@ -104,6 +105,14 @@ namespace GameHack.Items
                 y = y / sizeY * sizeY;
             }
             return new Rectangle(x, y, sizeX, sizeY);
+        }
+        Point getIndex(MouseState mouse)
+        {
+            int x = mouse.Position.X;
+            int y = mouse.Position.Y;
+            int newX = (x - graphicsDevice.PresentationParameters.BackBufferWidth / 16 * 4 / sizeX * sizeX - sizeX) / 50;
+            int newY = (y - graphicsDevice.PresentationParameters.BackBufferHeight / 9 * 3 / sizeY * sizeY) /50;
+            return new Point(newX, newY);
         }
         Boolean get_position_mouseCheck(MouseState mouse)
         {
@@ -136,6 +145,9 @@ namespace GameHack.Items
                         newReadyItem.Add(fakeItem);
                         this.cancelMoveItem = false;
                         this.isSelect = true;
+                        this.clickedLeftMouseClick = true;
+                        this.clickedRightMouseClick = false;
+                        this.clickedLeftMouseClickBuilt = false;
                     }
                     else
                     {
@@ -143,15 +155,14 @@ namespace GameHack.Items
                     }
                 }
                 readyItem = new List<ItemObj>();
-                readyItem= newReadyItem;
-                this.clickedLeftMouseClick = true;
-                this.clickedRightMouseClick = false;
-                this.clickedLeftMouseClickBuilt = false;
+                readyItem = newReadyItem;
             }
-            else if(mouseState.LeftButton == ButtonState.Pressed && this.clickedLeftMouseClick && get_position_mouseCheck(mouseState) && !this.clickedLeftMouseClickBuilt)
+            else if (mouseState.LeftButton == ButtonState.Pressed && this.clickedLeftMouseClick && get_position_mouseCheck(mouseState) && !this.clickedLeftMouseClickBuilt && !touch(get_position_mouse(mouseState), waterItems))
             {
                 ItemObj newItem = WaterObject.CopyObject(buffer as WaterObject);
                 waterItems.Add(newItem);
+                Point point = getIndex(mouseState);
+                arrWaterItem[point.X, point.Y] = newItem;
                 buffer = null;
                 for(int i = 0; i < readyItem.Count; i++)
                 {
@@ -168,6 +179,17 @@ namespace GameHack.Items
             
             
         }
+
+        bool touch(Rectangle a, List<ItemObj> b)
+        {
+            foreach (ItemObj tmp in b)
+            {
+                if (a.Intersects((tmp as WaterObject).getNewRectangle(tmp.rectangle)))
+                    return true;
+            }
+            return false;
+        }
+
         public void RightMouseClick(MouseState mouseState)
         {
             if (this.buffer != null && mouseState.RightButton == ButtonState.Pressed && !clickedRightMouseClick)
@@ -219,9 +241,9 @@ namespace GameHack.Items
         {
             SetSizePanelItem();
             spriteBatch.Begin();
-            foreach (ItemObj item in waterItems)
+            foreach (WaterObject item in waterItems)
             {
-                item.Draw();
+                item.DrawNew();
             }
             foreach (ItemObj item in readyItem)
             {
