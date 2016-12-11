@@ -41,6 +41,10 @@ namespace GameHack.GameLogic
                 {
                     currentObj = objectList[currentElX][currentELY + 1];
                 }
+                if (currentObj.rightPoint && objectList[currentElX + 1][currentELY].IsFinallyObj)
+                {
+                    IsLastListElement = true;
+                }
                 else
                 {
                     return Status.GameOver;
