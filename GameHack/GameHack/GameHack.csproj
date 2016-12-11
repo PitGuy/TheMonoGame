@@ -112,7 +112,8 @@
     <Compile Include="Items\ItemObj.cs" />
     <Compile Include="Items\MainField.cs" />
     <Compile Include="Items\Panel.cs" />
-    <Compile Include="Items\StartItem.cs" />
+    <Compile Include="Items\EleObject.cs" />
+    <Compile Include="Items\OxyObject.cs" />
     <Compile Include="Items\WaterObject.cs" />
     <Compile Include="MenuPage.xaml.cs">
       <DependentUpon>MenuPage.xaml</DependentUpon>
@@ -138,12 +139,16 @@
     <Content Include="Content\ear.png" />
     <Content Include="Content\mainFieldObj.png" />
     <Content Include="Content\mars.png" />
+    <Content Include="Content\oxyG.jpg" />
+    <Content Include="Content\oxyLD.jpg" />
+    <Content Include="Content\oxyLT.jpg" />
+    <Content Include="Content\oxyRD.jpg" />
+    <Content Include="Content\oxyRT.jpg" />
+    <Content Include="Content\oxyV.jpg" />
     <Content Include="Content\panel.png" />
     <Content Include="Content\panel.png" />
-    <Content Include="Content\Panel2.png" />
     <Content Include="Content\ramka.png" />
     <Content Include="Content\star.png" />
-    <Content Include="Content\Start.png" />
     <Content Include="Content\Vertical1.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

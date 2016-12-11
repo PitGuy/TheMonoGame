@@ -91,7 +91,7 @@ namespace GameHack
             GraphicsDevice.Clear(Color.DarkCyan);
             // TODO: Add your drawing code here
             background.Draw();
-            mainField.Draw();
+            //mainField.Draw();
             panel.Draw();
             factory.Draw();
             base.Draw(gameTime);

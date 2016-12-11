@@ -21,12 +21,20 @@ namespace GameHack.Items
         SpriteBatch spriteBatch;
         GraphicsDevice graphicsDevice;
 
+        Texture2D waterTextureG;
         Texture2D waterTexture;
-        Texture2D waterTextureAng;
+        Texture2D waterTextureAng1;
+        Texture2D waterTextureAng2;
+        Texture2D waterTextureAng3;
+        Texture2D waterTextureAng4;
         Texture2D elecTexture;
         Texture2D elecTextureAng;
-        Texture2D oxyTexture;
-        Texture2D oxyTextureAng;
+        Texture2D oxyTextureG;
+        Texture2D oxyTextureV;
+        Texture2D oxyTextureAng1;
+        Texture2D oxyTextureAng2;
+        Texture2D oxyTextureAng3;
+        Texture2D oxyTextureAng4;
         Texture2D fakeTexture;
 
         ItemObj[,] arrWaterItem = new ItemObj[8,6];
@@ -64,7 +72,7 @@ namespace GameHack.Items
         public ItemObj createRandomObject()
         {
             ItemObj item;
-            switch (new Random().Next(1, 15))
+            switch (new Random().Next(1, 2))
             {
                 case 1: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
                 case 2: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
@@ -78,10 +86,19 @@ namespace GameHack.Items
                 case 10: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
                 case 11: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
                 case 12: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 13: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 14: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                case 15: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
-                default: item = new WaterObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 13: item = new EleObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 14: item = new EleObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 15: item = new EleObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 16: item = new EleObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 17: item = new EleObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 18: item = new EleObject(waterTexture, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 19: item = new OxyObject(oxyTextureG, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 20: item = new OxyObject(oxyTextureV, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 21: item = new OxyObject(oxyTextureAng1, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 22: item = new OxyObject(oxyTextureAng2, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 23: item = new OxyObject(oxyTextureAng3, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                case 24: item = new OxyObject(oxyTextureAng4, spriteBatch, graphicsDevice, sizeX, sizeY); break;
+                default: item = null; break;
             }
             return item;
         }
@@ -259,6 +276,12 @@ namespace GameHack.Items
         public void LoadContent(ContentManager content, SpriteBatch sp)
         {
             waterTexture = content.Load<Texture2D>(ContentEnum.BLOCK);
+            oxyTextureG = content.Load<Texture2D>(ContentEnum.OXYG);
+            oxyTextureV = content.Load<Texture2D>(ContentEnum.OXYV);
+            oxyTextureAng1 = content.Load<Texture2D>(ContentEnum.OXYLD);
+            oxyTextureAng2 = content.Load<Texture2D>(ContentEnum.OXYLT);
+            oxyTextureAng3 = content.Load<Texture2D>(ContentEnum.OXYRT);
+            oxyTextureAng4 = content.Load<Texture2D>(ContentEnum.OXYRD);
             fakeTexture = content.Load<Texture2D>(ContentEnum.FAKE);
             spriteBatch = sp;
             readyItem.Add(createRandomObject());

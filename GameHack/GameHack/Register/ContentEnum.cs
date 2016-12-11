@@ -11,11 +11,16 @@ namespace GameHack.Register
         public const string BACKGROUND = "background";
         public const string STAR = "star";
         public const string MARS = "mars";
-		public const string PANEL = "Panel2";
+		public const string PANEL = "ramka";
         public const string BLOCK = "Vertical1";
         public const string MAINFIELDOBJ = "mainFieldObj";
         public const string FAKE = "star";
         public const string EXIT = "ear";
-        public const string START = "Start";
+        public const string OXYG = "oxyG";
+        public const string OXYV = "oxyV";
+        public const string OXYLD = "oxyLD";
+        public const string OXYLT = "oxyRT";
+        public const string OXYRT = "oxyLT";
+        public const string OXYRD = "oxyRD";
     }
 }

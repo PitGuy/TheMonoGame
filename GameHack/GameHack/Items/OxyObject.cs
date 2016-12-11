@@ -11,8 +11,8 @@ using Microsoft.Xna.Framework.Content;
 
 namespace GameHack.Items
 {
-    public class WaterObject : ItemObj    {
-        public WaterObject(Texture2D texture, SpriteBatch sp, GraphicsDevice gd, int sX, int sY)
+    public class OxyObject : ItemObj    {
+        public OxyObject(Texture2D texture, SpriteBatch sp, GraphicsDevice gd, int sX, int sY)
         {
             oldsizeX = sX;
             oldsizeY = sY;
@@ -22,7 +22,7 @@ namespace GameHack.Items
         }
         
 
-        public WaterObject() { }
+        public OxyObject() { }
         public Rectangle RectanglePr
         {
             get { return this.rectangle; }
@@ -34,19 +34,19 @@ namespace GameHack.Items
             this.rectangle.Y = y;
         }
         #region[Copy]
-        public static WaterObject CopyObject(WaterObject obj)
+        public static OxyObject CopyObject(OxyObject obj)
         {
             Texture2D texture = default(Texture2D);
             texture = obj.Texture;
-            WaterObject copy = new WaterObject(texture, obj.SpriteBatch, obj.graphicsDevice, obj.oldsizeX, obj.oldsizeY);
+            OxyObject copy = new OxyObject(texture, obj.SpriteBatch, obj.graphicsDevice, obj.oldsizeX, obj.oldsizeY);
             copy.rectangle = new Rectangle(obj.rectangle.X, obj.rectangle.Y, obj.rectangle.Width, obj.rectangle.Height);
             return copy;
         }
-        public static WaterObject CopyObject(WaterObject obj,Texture2D texture)
+        public static OxyObject CopyObject(OxyObject obj,Texture2D texture)
         {
             Texture2D _texture = default(Texture2D);
             _texture = texture;
-            WaterObject copy = new WaterObject(_texture, obj.SpriteBatch, obj.graphicsDevice, obj.oldsizeX, obj.oldsizeY);
+            OxyObject copy = new OxyObject(_texture, obj.SpriteBatch, obj.graphicsDevice, obj.oldsizeX, obj.oldsizeY);
             copy.rectangle = new Rectangle(obj.rectangle.X, obj.rectangle.Y, obj.rectangle.Width, obj.rectangle.Height);
             return copy;
         }
