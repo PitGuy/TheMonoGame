@@ -42,10 +42,10 @@ namespace GameHack.Items
 
         public Rectangle GetPanelPosition()
         {
-            int x = graphicsDevice.PresentationParameters.BackBufferWidth / 16 * 13;
-            int y = graphicsDevice.PresentationParameters.BackBufferHeight / 9;
-            int width = graphicsDevice.PresentationParameters.BackBufferWidth / 16 * 3;
-            int height = graphicsDevice.PresentationParameters.BackBufferHeight / 9 * 7;
+            int x = graphicsDevice.PresentationParameters.BackBufferWidth / 16 * 15;
+            int y = graphicsDevice.PresentationParameters.BackBufferHeight / 9*3;
+            int width = graphicsDevice.PresentationParameters.BackBufferWidth / 16 * 1;
+            int height = graphicsDevice.PresentationParameters.BackBufferHeight / 9 * 3;
             return new Rectangle(x, y, width, height);
         }
 

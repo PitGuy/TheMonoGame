@@ -112,6 +112,9 @@
     <Compile Include="Items\MainField.cs" />
     <Compile Include="Items\Panel.cs" />
     <Compile Include="Items\WaterObject.cs" />
+    <Compile Include="MenuPage.xaml.cs">
+      <DependentUpon>MenuPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Register\ContentEnum.cs" />
     <Compile Include="Register\Options.cs" />
@@ -126,12 +129,15 @@
     <None Include="GameHack_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Dark_Space.png" />
+    <Content Include="Assets\marsMenu.png" />
     <Content Include="Content\background.jpg" />
     <Content Include="Content\block.png" />
     <Content Include="Content\mainFieldObj.png" />
     <Content Include="Content\mars.png" />
     <Content Include="Content\panel.png" />
     <Content Include="Content\panel.png" />
+    <Content Include="Content\ramka.png" />
     <Content Include="Content\star.png" />
     <Content Include="Content\Vertical1.png" />
     <Content Include="Properties\Default.rd.xml" />
@@ -154,6 +160,10 @@
     <Page Include="GamePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup />

@@ -253,8 +253,8 @@ namespace GameHack.Items
             int height = rectangle.Height;
             int countItem = readyItem.Count;
 
-            int change_x = 10;
-            int change_y = 10;
+            int change_x = 20;
+            int change_y = 20;
 
             int x_n = 0;
             int y_n = 0;
@@ -268,11 +268,12 @@ namespace GameHack.Items
                 ItemObj it = item;
                 x_n = x + change_x;
                 y_n = y + change_y + height_n * indexItem;
-                if (width_n == 0) width_n = width - change_x;
-                if (height_n == 0) height_n = height / countItem - change_y;
+                if (width_n == 0) width_n = width - change_x-20;
+                if (height_n == 0) height_n = height / countItem - change_y-20;
 
                 Rectangle rec = new Rectangle(x_n, y_n, width_n, height_n);
                 indexItem++;
+                height_n += 25;
                 it.rectangle = rec;
                 resetItems.Add(it);
             }
