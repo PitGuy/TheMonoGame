@@ -43,7 +43,7 @@ namespace GameHack.Items
         Texture2D oxyTextureAng4;
         Texture2D fakeTexture;
 
-        ItemObj[,] arrItem = new ItemObj[15,10];
+        public static ItemObj[,] arrItem = new ItemObj[15,10];
         List<ItemObj> waterItems;
         List<ItemObj> elecItems;
         List<ItemObj> oxyItems;

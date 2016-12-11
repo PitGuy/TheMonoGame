@@ -143,6 +143,7 @@
     <Content Include="Content\5.png" />
     <Content Include="Content\6.png" />
     <Content Include="Content\background.jpg" />
+    <Content Include="Content\certo.png" />
     <Content Include="Content\ear.png" />
     <Content Include="Content\Electric1.png" />
     <Content Include="Content\Electroni2.png" />
@@ -153,6 +154,7 @@
     <Content Include="Content\Empty.png" />
     <Content Include="Content\mainFieldObj.png" />
     <Content Include="Content\mars.png" />
+    <Content Include="Content\ok.png" />
     <Content Include="Content\ramka.png" />
     <Content Include="Content\star.png" />
     <Content Include="Content\Start.png" />

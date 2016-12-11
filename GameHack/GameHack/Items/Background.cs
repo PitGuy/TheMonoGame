@@ -119,7 +119,7 @@ namespace GameHack.Items
                 if (this.SelectedItem(run.rectangle, mouseX, mouseY))
                 {
                     GameProcess.Status status = GameProcess.succesValidation(ItemFactory.arrItem, 8, 6);
-                    Draw(status);
+                    //Draw(status);
                 }
             }
         }
@@ -136,7 +136,7 @@ namespace GameHack.Items
             run.Draw();
             spriteBatch.End();
         }
-        public void Draw(GameProcess.Status status)
+       /* public void Draw(GameProcess.Status status)
         {
             if (status == GameProcess.Status.Ok)
             {
@@ -147,9 +147,9 @@ namespace GameHack.Items
                 this.textureResult = content.Load<Texture2D>(ContentEnum.STATUS_NO);
             }
             spriteBatch.Begin();
-            spriteBatch.Draw(textureResult, new Rectangle(100,100,100,100),Color.White);
+            spriteBatch.Draw(textureResult, new Rectangle(0,0,100,100),Color.White);
             spriteBatch.End();
-        }
+        }*/
 
         private Rectangle GetMarsPosition()
         {
