@@ -136,6 +136,12 @@
   <ItemGroup>
     <Content Include="Assets\Dark_Space.png" />
     <Content Include="Assets\marsMenu.png" />
+    <Content Include="Content\1.png" />
+    <Content Include="Content\2.png" />
+    <Content Include="Content\3.png" />
+    <Content Include="Content\4.png" />
+    <Content Include="Content\5.png" />
+    <Content Include="Content\6.png" />
     <Content Include="Content\background.jpg" />
     <Content Include="Content\block.png" />
     <Content Include="Content\ear.png" />

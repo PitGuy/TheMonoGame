@@ -248,7 +248,11 @@ namespace GameHack.Items
         {
             foreach (ItemObj tmp in b)
             {
-                if (a.Intersects((tmp as WaterObject).getNewRectangle(tmp.rectangle)))
+                if (tmp is WaterObject && a.Intersects((tmp as WaterObject).getNewRectangle(tmp.rectangle)))
+                    return true;
+                if (tmp is EleObject && a.Intersects((tmp as EleObject).getNewRectangle(tmp.rectangle)))
+                    return true;
+                if (tmp is OxyObject && a.Intersects((tmp as OxyObject).getNewRectangle(tmp.rectangle)))
                     return true;
             }
             return false;
@@ -356,6 +360,12 @@ namespace GameHack.Items
             elecTexture4 = content.Load<Texture2D>(ContentEnum.ELECTRONIC4);
             elecTexture5 = content.Load<Texture2D>(ContentEnum.ELECTRONIC5);
             elecTexture6 = content.Load<Texture2D>(ContentEnum.ELECTRONIC6);
+            oxyTextureG = content.Load<Texture2D>(ContentEnum.OXY4);
+            oxyTextureV = content.Load<Texture2D>(ContentEnum.OXY1);
+            oxyTextureAng1 = content.Load<Texture2D>(ContentEnum.OXY2);
+            oxyTextureAng2 = content.Load<Texture2D>(ContentEnum.OXY3);
+            oxyTextureAng3 = content.Load<Texture2D>(ContentEnum.OXY6);
+            oxyTextureAng4 = content.Load<Texture2D>(ContentEnum.OXY5);
             fakeTexture = content.Load<Texture2D>(ContentEnum.FAKE);
             spriteBatch = sp;
             readyItem.Add(createRandomObject());
