@@ -16,5 +16,6 @@ namespace GameHack.Register
         public const string MAINFIELDOBJ = "mainFieldObj";
         public const string FAKE = "star";
         public const string EXIT = "ear";
+        public const string START = "Start";
     }
 }

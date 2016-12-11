@@ -21,11 +21,18 @@ namespace GameHack.Items
         GraphicsDevice graphicsDevice;
 
         ExitItem exit;
+        StartItem run;
+
         int heightExitImage = 0;
         int widthExitImage = 0;
+
+        int heightRunImage = 0;
+        int widthRunImage = 0;
+
         Star starts;
 
         bool moveMouseOnExit = false;
+        bool moveMouseOnRun = false;
 
         public Background(GraphicsDevice gd)
         {
@@ -39,7 +46,7 @@ namespace GameHack.Items
                     &&
                     y >= rectangle.Y && y <= (rectangle.Y + rectangle.Height);
         }
-        public void MouseMove(MouseState mouseState)
+        public void MouseMove_Exit(MouseState mouseState)
         {
             int mouseX = mouseState.X;
             int mouseY = mouseState.Y;
@@ -59,7 +66,7 @@ namespace GameHack.Items
                 moveMouseOnExit = false ;
             }
         }
-        public void LeftMouseClick(MouseState mouseState)
+        public void LeftMouseClick_Exit(MouseState mouseState)
         {
             int mouseX = mouseState.X;
             int mouseY = mouseState.Y;
@@ -73,6 +80,45 @@ namespace GameHack.Items
             }
         }
 
+
+
+        public void MouseMove_Run(MouseState mouseState)
+        {
+            int mouseX = mouseState.X;
+            int mouseY = mouseState.Y;
+
+            if (this.SelectedItem(run.rectangle, mouseX, mouseY))
+            {
+                if (!moveMouseOnRun)
+                {
+                    run.rectangle.Height += 20;
+                    run.rectangle.Width += 20;
+                    moveMouseOnRun = true;
+                }
+            }
+            else
+            {
+                run.rectangle.Height = heightExitImage;
+                run.rectangle.Width = widthExitImage;
+                moveMouseOnRun = false;
+            }
+        }
+        public void LeftMouseClick_Run(MouseState mouseState)
+        {
+            int mouseX = mouseState.X;
+            int mouseY = mouseState.Y;
+
+            if (mouseState.LeftButton == ButtonState.Pressed)
+            {
+                if (this.SelectedItem(run.rectangle, mouseX, mouseY))
+                {
+                    
+                }
+            }
+        }
+
+
+
         public void Draw()
         {
             spriteBatch.Begin();
@@ -80,6 +126,7 @@ namespace GameHack.Items
             starts.Draw();
             spriteBatch.Draw(marsTexture, GetMarsPosition(), Color.White);
             exit.Draw();
+            run.Draw();
             spriteBatch.End();
         }
 
@@ -99,17 +146,27 @@ namespace GameHack.Items
             starts.LoadContent(content, sp);
             spriteBatch = sp;
             exit = new ExitItem(new Rectangle(graphicsDevice.PresentationParameters.BackBufferWidth-50*3, graphicsDevice.PresentationParameters.BackBufferHeight/10, 50, 50), sp);
+
+            run = new StartItem(new Rectangle(graphicsDevice.PresentationParameters.BackBufferWidth - 50 * 5, graphicsDevice.PresentationParameters.BackBufferHeight / 10, 50, 50), sp);
+
             heightExitImage = exit.rectangle.Height;
             widthExitImage = exit.rectangle.Width;
+
+            heightRunImage = run.rectangle.Height;
+            widthRunImage = run.rectangle.Width;
             exit.LoadContent(content, sp);
+            run.LoadContent(content, sp);
         }
 
         public void Update(GameTime gameTime)
         {
             starts.Update(gameTime);
             MouseState mouseState = Mouse.GetState();
-            LeftMouseClick(mouseState);
-            MouseMove(mouseState);
+            LeftMouseClick_Exit(mouseState);
+            MouseMove_Exit(mouseState);
+
+            LeftMouseClick_Run(mouseState);
+            MouseMove_Run(mouseState);
         }
 
         public void Update(GameTime gameTime, ContentManager content)
