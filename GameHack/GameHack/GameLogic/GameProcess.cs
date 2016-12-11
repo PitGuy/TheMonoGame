@@ -10,24 +10,45 @@ namespace GameHack.GameLogic
 {
     public class GameProcess
     {
+        public bool IsLastListEl = false;
+        
         public enum Status
         {
             Ok = 0,
-            GameOver = 1
+            GameOver = 1,
         }
 
-        public Status succesValidation(ItemObj prevObject, ItemObj currentObject)
+        public Status succesValidation(ItemObj [][]objectList, int startElX, int startElY)
         {
-            if (currentObject.leftPoint && prevObject.rightPoint)
-                return Status.Ok;
-            else if (currentObject.rightPoint && prevObject.leftPoint)
-                return Status.Ok;
-            else if (currentObject.upPoint && prevObject.downPoint)
-                return Status.Ok;
-            else if (currentObject.downPoint && prevObject.upPoint)
-                return Status.Ok;
+            int currentElX = startElX;
+            int currentELY = startElY;
+            ItemObj currentObj = objectList[currentElX][currentELY];
 
-            return Status.GameOver;
+            while(!IsLastListEl)
+            {
+                if (currentObj.rightPoint && objectList[currentElX + 1][currentELY].leftPoint)
+                {
+                    currentObj = objectList[currentElX + 1][currentELY]; 
+                }
+                if (currentObj.leftPoint && objectList[currentElX - 1][currentELY].rightPoint)
+                {
+                    currentObj = objectList[currentElX - 1][currentELY];
+                }
+                if (currentObj.upPoint && objectList[currentElX][currentELY - 1].downPoint)
+                {
+                    currentObj = objectList[currentElX][currentELY - 1];
+                }
+                if (currentObj.downPoint && objectList[currentElX][currentELY + 1].upPoint)
+                {
+                    currentObj = objectList[currentElX][currentELY + 1];
+                }
+                else
+                {
+                    return Status.GameOver;
+                }
+            }
+            return Status.Ok;
         }
+        
     }
 }
