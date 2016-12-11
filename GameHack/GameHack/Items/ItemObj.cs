@@ -22,6 +22,7 @@ namespace GameHack.Items
         public bool rightPoint;
         public bool upPoint;
         public bool downPoint;
+        public bool IsFinallyObj;
         protected GraphicsDevice graphicsDevice;
 
         public Texture2D Texture{ get { return texture; } set { texture = value; } }
