@@ -107,6 +107,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Interfaces\IGameObject.cs" />
     <Compile Include="Items\Background.cs" />
+    <Compile Include="Items\ExitItem.cs" />
     <Compile Include="Items\ItemFactory.cs" />
     <Compile Include="Items\ItemObj.cs" />
     <Compile Include="Items\MainField.cs" />
@@ -133,6 +134,7 @@
     <Content Include="Assets\marsMenu.png" />
     <Content Include="Content\background.jpg" />
     <Content Include="Content\block.png" />
+    <Content Include="Content\ear.png" />
     <Content Include="Content\mainFieldObj.png" />
     <Content Include="Content\mars.png" />
     <Content Include="Content\panel.png" />

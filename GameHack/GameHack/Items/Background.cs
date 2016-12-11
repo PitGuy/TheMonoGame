@@ -3,11 +3,13 @@ using GameHack.Register;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
 
 namespace GameHack.Items
 {
@@ -18,12 +20,57 @@ namespace GameHack.Items
         SpriteBatch spriteBatch;
         GraphicsDevice graphicsDevice;
 
+        ExitItem exit;
+        int heightExitImage = 0;
+        int widthExitImage = 0;
         Star starts;
+
+        bool moveMouseOnExit = false;
 
         public Background(GraphicsDevice gd)
         {
             starts = new Star();
             graphicsDevice = gd;
+        }
+
+        public bool SelectedItem(Rectangle rectangle, int x, int y)
+        {
+            return (x >= rectangle.X && x <= (rectangle.X + rectangle.Width))
+                    &&
+                    y >= rectangle.Y && y <= (rectangle.Y + rectangle.Height);
+        }
+        public void MouseMove(MouseState mouseState)
+        {
+            int mouseX = mouseState.X;
+            int mouseY = mouseState.Y;
+            
+            if (this.SelectedItem(exit.rectangle, mouseX, mouseY))
+            {
+                if (!moveMouseOnExit) {
+                    exit.rectangle.Height +=20;
+                    exit.rectangle.Width +=20;
+                    moveMouseOnExit = true;
+                }
+            }
+            else
+            {
+                exit.rectangle.Height = heightExitImage;
+                exit.rectangle.Width = widthExitImage;
+                moveMouseOnExit = false ;
+            }
+        }
+        public void LeftMouseClick(MouseState mouseState)
+        {
+            int mouseX = mouseState.X;
+            int mouseY = mouseState.Y;
+
+            if (mouseState.LeftButton == ButtonState.Pressed)
+            {
+                if (this.SelectedItem(exit.rectangle, mouseX, mouseY))
+                {
+                    CoreApplication.Exit();
+                }
+            }
         }
 
         public void Draw()
@@ -32,6 +79,7 @@ namespace GameHack.Items
             spriteBatch.Draw(backgroundTexture, new Rectangle(0,0, graphicsDevice.PresentationParameters.BackBufferWidth, graphicsDevice.PresentationParameters.BackBufferHeight), Color.White);
             starts.Draw();
             spriteBatch.Draw(marsTexture, GetMarsPosition(), Color.White);
+            exit.Draw();
             spriteBatch.End();
         }
 
@@ -50,11 +98,18 @@ namespace GameHack.Items
             marsTexture = content.Load<Texture2D>(ContentEnum.MARS);
             starts.LoadContent(content, sp);
             spriteBatch = sp;
+            exit = new ExitItem(new Rectangle(graphicsDevice.PresentationParameters.BackBufferWidth-50*3, graphicsDevice.PresentationParameters.BackBufferHeight/10, 50, 50), sp);
+            heightExitImage = exit.rectangle.Height;
+            widthExitImage = exit.rectangle.Width;
+            exit.LoadContent(content, sp);
         }
 
         public void Update(GameTime gameTime)
         {
             starts.Update(gameTime);
+            MouseState mouseState = Mouse.GetState();
+            LeftMouseClick(mouseState);
+            MouseMove(mouseState);
         }
 
         public void Update(GameTime gameTime, ContentManager content)
