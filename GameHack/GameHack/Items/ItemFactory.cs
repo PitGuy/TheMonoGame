@@ -260,6 +260,7 @@ namespace GameHack.Items
             int y_n = 0;
             int width_n = 0;
             int height_n = 0;
+            int chngeHeight = 0;
             int indexItem = 0;
 
             List<ItemObj> resetItems = new List<ItemObj>();
@@ -267,13 +268,13 @@ namespace GameHack.Items
             {
                 ItemObj it = item;
                 x_n = x + change_x;
-                y_n = y + change_y + height_n * indexItem;
+                y_n = y + change_y + height/countItem * indexItem;
                 if (width_n == 0) width_n = width - change_x-20;
                 if (height_n == 0) height_n = height / countItem - change_y-20;
 
                 Rectangle rec = new Rectangle(x_n, y_n, width_n, height_n);
                 indexItem++;
-                height_n += 25;
+                chngeHeight += 25;
                 it.rectangle = rec;
                 resetItems.Add(it);
             }
