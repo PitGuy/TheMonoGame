@@ -137,6 +137,7 @@
     <Content Include="Content\background.jpg" />
     <Content Include="Content\block.png" />
     <Content Include="Content\ear.png" />
+    <Content Include="Content\Empty.png" />
     <Content Include="Content\mainFieldObj.png" />
     <Content Include="Content\mars.png" />
     <Content Include="Content\oxyG.jpg" />
