@@ -6,37 +6,41 @@ using System.Threading.Tasks;
 
 namespace GameHack.Register
 {
-    public static class ContentEnum
+    public static class ContentPatch
     {
         public const string BACKGROUND = "background";
         public const string STAR = "star";
-        public const string MARS = "mars";
+        public const string PLANET = "planet";
 		public const string PANEL = "ramka";
-        public const string BLOCK = "Vertical1";
-        public const string MAINFIELDOBJ = "mainFieldObj";
-        public const string FAKE = "Empty";
         public const string EXIT = "ear";
-        public const string ELECTRONIC1 = "Electric1";
-        public const string ELECTRONIC2 = "Electroni2";
-        public const string ELECTRONIC3 = "Electroni3";
-        public const string ELECTRONIC4 = "Electroni4";
-        public const string ELECTRONIC5 = "Electroni5";
-        public const string ELECTRONIC6 = "Electroni6";
-        public const string OXY1 = "1";
-        public const string OXY2 = "2";
-        public const string OXY3 = "3";
-        public const string OXY4 = "4";
-        public const string OXY5 = "5";
-        public const string OXY6 = "6";
-        public const string WOT1 = "w1";
-        public const string WOT2 = "w2";
-        public const string WOT3 = "w3";
-        public const string WOT4 = "w4";
-        public const string WOT5 = "w5";
-        public const string WOT6 = "w6";
-        public const string START = "start";
+        public const string ET1 = "e1";
+        public const string ET2 = "e2";
+        public const string ET3 = "e3";
+        public const string ET4 = "e4";
+        public const string ET5 = "e5";
+        public const string ET6 = "e6";
+        public const string ET7 = "e7";
+        public const string EWT = "ew";
+        public const string EOT = "eo";
+        public const string OT1 = "o1";
+        public const string OT2 = "o2";
+        public const string OT3 = "o3";
+        public const string OT4 = "o4";
+        public const string OT5 = "o5";
+        public const string OT6 = "o6";
+        public const string OT7 = "o7";
+        public const string OET = "ow";
+        public const string OWT = "oe";
+        public const string WT1 = "w1";
+        public const string WT2 = "w2";
+        public const string WT3 = "w3";
+        public const string WT4 = "w4";
+        public const string WT5 = "w5";
+        public const string WT6 = "w6";
+        public const string WT7 = "w7";
+        public const string WOT = "wo";
+        public const string WET = "we";
+        public const string RUN = "start";
         public const string SUN = "sun";
-        public const string STATUS_OK = "cetro";
-        public const string STATUS_NO = "ok";
     }
 }

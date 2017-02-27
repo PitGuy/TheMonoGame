@@ -11,8 +11,8 @@ namespace GameHack.Interfaces
 {
     interface IGameObject
     {
-        void LoadContent(ContentManager content, SpriteBatch sp);
+        void LoadContent(ContentManager content);
         void Update(GameTime gameTime);
-        void Draw();
+        void Draw(SpriteBatch spriteBatch);
     }
 }

@@ -1,70 +1,179 @@
-﻿using GameHack.Items;
-using GameHack.Register;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GameHack.GameElement;
+using Microsoft.Xna.Framework;
+
 
 namespace GameHack.GameLogic
 {
-    public class GameProcess
+    class GameProcess
     {
-        public static bool IsLastListElement = false;      
-        public enum Status
+        public static bool Validate(int from, Point currentPoint, Item[,] fields, string type, Point lastPoint)
         {
-            Ok = 0,
-            GameOver = 1,
-        }
-
-        public static Status succesValidation(ItemObj [,]objectList, int startElX, int startElY)
-        {
-            int currentElX = startElX;
-            int currentELY = startElY;
-            ItemObj currentObj = objectList[currentElX,currentELY];
-
-            while (!IsLastListElement)
+            Item current = fields[currentPoint.X,currentPoint.Y];
+            if (current == null)
+                return false;
+            if(from == 4)
             {
-                if (currentObj != null && currentObj.rightPoint && objectList[currentElX + 1,currentELY].leftPoint &&
-                    currentObj.GetType() ==  objectList[currentElX + 1, currentELY].GetType())
+                if (current.resourceType != type)
+                    return false;
+                if (current.ElementType.X == -1)
                 {
-                    currentObj.startDrow = 200;
-                    currentObj = objectList[currentElX + 1, currentELY];
-                    currentObj.leftPoint = false;
+                    current.turn = 0;
+                    int newFrom = current.ElementType.Y == 1 ? 3 : 1;
+                    if(newFrom == 3)
+                    {
+                        if (currentPoint.Y - current.ElementType.Y < 0)
+                        {
+                            if (new Point(currentPoint.X, currentPoint.Y - current.ElementType.Y) != lastPoint)
+                                return false;
+                            else return true;
+                        }
+                    }
+                    else if(currentPoint.Y - current.ElementType.Y >= 10)
+                    {
+                        if (new Point(currentPoint.X, currentPoint.Y - current.ElementType.Y) != lastPoint)
+                            return false;
+                        else return true;
+                    }
+                    return Validate(newFrom, new Point(currentPoint.X, currentPoint.Y - current.ElementType.Y), fields, type, lastPoint);
                 }
-                if (currentObj != null && currentObj.leftPoint && objectList[currentElX - 1, currentELY].rightPoint &&
-                    currentObj.GetType() == objectList[currentElX - 1, currentELY].GetType())
+                else if((current.ElementType.X == 0 && current.ElementType.Y == 1) || (current.ElementType.X == 1 && current.ElementType.Y == 0) || (current.ElementType.X == 0 && current.ElementType.Y == 0 ))
                 {
-                    currentObj.startDrow = 200;
-                    currentObj = objectList[currentElX - 1, currentELY];
-                    currentObj.rightPoint = false;
+                    current.turn = 0;
+                    int newFrom = 4;
+                    if (currentPoint.X + 1 >= 10)
+                    {
+                        if (new Point(currentPoint.X + 1, currentPoint.Y) != lastPoint)
+                            return false;
+                        else return true;
+                    }
+                    return Validate(newFrom, new Point(currentPoint.X + 1, currentPoint.Y), fields, type, lastPoint);
                 }
-                if (currentObj != null && currentObj.upPoint && objectList[currentElX, currentELY - 1].downPoint &&
-                    currentObj.GetType() == objectList[currentELY - 1, currentELY].GetType())
-                {
-                    currentObj.startDrow = 200;
-                    currentObj = objectList[currentElX, currentELY - 1];
-                    currentObj.downPoint = false;
-                }
-                if (currentObj != null && currentObj.downPoint && objectList[currentElX, currentELY + 1].upPoint &&
-                    currentObj.GetType() == objectList[currentELY + 1, currentELY].GetType())
-                {
-                    currentObj.startDrow = 200;
-                    currentObj = objectList[currentElX, currentELY + 1];
-                    currentObj.upPoint = false;
-                }
-                if (currentObj != null && currentObj.rightPoint && objectList[currentElX + 1, currentELY].IsFinallyObj &&
-                    currentObj.GetType() == objectList[currentElX + 1, currentELY].GetType())
-                {
-                    IsLastListElement = true;
-                }
-                else
-                {
-                    return Status.GameOver;
-                }
+                else return false;
             }
-            return Status.Ok;
+            if(from == 2)
+            {
+                if (current.resourceType != type)
+                    return false;
+                if (current.ElementType.X == 1 && current.ElementType.Y != 0)
+                {
+                    current.turn = 0;
+                    int newFrom = current.ElementType.Y == 1 ? 3 : 1;
+                    if (currentPoint.Y - current.ElementType.Y < 0 || currentPoint.Y - current.ElementType.Y > 10)
+                    {
+                        if (new Point(currentPoint.X, currentPoint.Y - current.ElementType.Y) != lastPoint)
+                            return false;
+                        else return true;
+                    }
+                    return Validate(newFrom, new Point(currentPoint.X, currentPoint.Y - current.ElementType.Y), fields, type, lastPoint);
+                }
+                else if ((current.ElementType.X == 0 && current.ElementType.Y == 1) || (current.ElementType.X == 1 && current.ElementType.Y == 0) || (current.ElementType.X == 0 && current.ElementType.Y == 0))
+                {
+                    current.turn = 0;
+                    int newFrom = 2;
+                    if (currentPoint.X - 1 < 0)
+                    {
+                        if (new Point(currentPoint.X - 1, currentPoint.Y) != lastPoint)
+                            return false;
+                        else return true;
+                    }
+                    return Validate(newFrom, new Point(currentPoint.X - 1, currentPoint.Y), fields, type, lastPoint);
+                }
+                else return false;
+            }
+            if (from == 3)
+            {
+                if (current.ElementType.Y == -1 && current.ElementType.X != 0)
+                {
+                    if (current.resourceType != type)
+                        return false;
+                    current.turn = 0;
+                    int newFrom = current.ElementType.X == 1 ? 4 : 2;
+                    if (currentPoint.X + current.ElementType.X > 10)
+                    {
+                        if (new Point(currentPoint.X + current.ElementType.Y, currentPoint.Y ) != lastPoint)
+                            return false;
+                        else return true;
+                    }
+                    return Validate(newFrom, new Point(currentPoint.X + current.ElementType.X, currentPoint.Y), fields, type, lastPoint);
+                }
+                else if ((current.ElementType.X == 0 && current.ElementType.Y == -1) || (current.ElementType.X == 1 && current.ElementType.Y == 0))
+                {
+                    if (current.resourceType != type)
+                        return false;
+                    current.turn = 0;
+                    int newFrom = 3;
+                    if (currentPoint.Y - 1 < 0)
+                    {
+                        if (new Point(currentPoint.X, currentPoint.Y - 1) != lastPoint)
+                            return false;
+                        else return true;
+                    }
+                    return Validate(newFrom, new Point(currentPoint.X, currentPoint.Y - 1), fields, type, lastPoint);
+                }
+                else if (current.ElementType.X == 0 && current.ElementType.Y == 0)
+                {
+                    if (current.resourceType2 != type)
+                        return false;
+                    current.turn = 0;
+                    int newFrom = 3;
+                    if (currentPoint.Y - 1 < 0)
+                    {
+                        if (new Point(currentPoint.X, currentPoint.Y - 1) != lastPoint)
+                            return false;
+                        else return true;
+                    }
+                    return Validate(newFrom, new Point(currentPoint.X, currentPoint.Y - 1), fields, type, lastPoint);
+                }
+                else return false;
+            }
+            if (from == 1)
+            {
+                if (current.ElementType.Y == 1 && current.ElementType.X != 0)
+                {
+                    if (current.resourceType != type)
+                        return false;
+                    current.turn = 0;
+                    int newFrom = current.ElementType.X == 1 ? 4 : 2;
+                    if (currentPoint.X + current.ElementType.X > 10 || currentPoint.X + current.ElementType.X < 0)
+                    {
+                        if (new Point(currentPoint.X + current.ElementType.X, currentPoint.Y) != lastPoint)
+                            return false;
+                        else return true;
+                    }
+                    return Validate(newFrom, new Point(currentPoint.X + current.ElementType.X, currentPoint.Y), fields, type, lastPoint);
+
+                }
+                else if ((current.ElementType.X == 0 && current.ElementType.Y == -1) || (current.ElementType.X == 1 && current.ElementType.Y == 0))
+                {
+                    if (current.resourceType != type)
+                        return false;
+                    current.turn = 0;
+                    int newFrom = 1;
+                    if (currentPoint.Y + 1 >= 10)
+                    {
+                        if (new Point(currentPoint.X, currentPoint.Y + 1) != lastPoint)
+                            return false;
+                        else return true;
+                    }
+                    return Validate(newFrom, new Point(currentPoint.X, currentPoint.Y + 1), fields, type, lastPoint);
+                }
+                else if (current.ElementType.X == 0 && current.ElementType.Y == 0)
+                {
+                    if (current.resourceType2 != type)
+                        return false;
+                    current.turn = 0;
+                    int newFrom = 3;
+                    if (currentPoint.Y + 1 >= 10)
+                    {
+                        if (new Point(currentPoint.X, currentPoint.Y + 1) != lastPoint)
+                            return false;
+                        else return true;
+                    }
+                    return Validate(newFrom, new Point(currentPoint.X, currentPoint.Y + 1), fields, type, lastPoint);
+                }
+                else return false;
+            }
+            return false;
         }
-        
     }
 }
