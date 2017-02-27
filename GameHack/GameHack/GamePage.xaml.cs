@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameHack.Setting;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,16 +23,16 @@ namespace GameHack
     /// </summary>
     public sealed partial class GamePage : Page
     {
-		readonly Game1 _game;
-
+		readonly GameLevel _game;
+        Setup setup;
 		public GamePage()
         {
             this.InitializeComponent();
-            
+            setup = Setup.GetInstance();
             //this.Frame.Navigate(typeof(MenuPage));
 			// Create the game.
 			var launchArguments = string.Empty;
-            _game = MonoGame.Framework.XamlGame<Game1>.Create(launchArguments, Window.Current.CoreWindow, swapChainPanel);
+            _game = MonoGame.Framework.XamlGame<GameLevel>.Create(launchArguments, Window.Current.CoreWindow, swapChainPanel);
         }
     }
 }

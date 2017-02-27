@@ -97,34 +97,36 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstraction\ButtonObject.cs" />
+    <Compile Include="GameElement\Item.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BackgroundElements\Background.cs" />
+    <Compile Include="Buttons\SunButton.cs" />
+    <Compile Include="Buttons\ExitButton.cs" />
+    <Compile Include="BackgroundElements\Stars.cs" />
+    <Compile Include="Buttons\RunButton.cs" />
+    <Compile Include="GameElement\ElementBuffer.cs" />
+    <Compile Include="GameElement\GameField.cs" />
     <Compile Include="GameLogic\GameProcess.cs" />
+    <Compile Include="GameLogic\ItemFactory.cs" />
+    <Compile Include="GameElement\Panel.cs" />
+    <Compile Include="GameElement\Planet.cs" />
+    <Compile Include="GameLevel.cs" />
     <Compile Include="GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Game1.cs" />
     <Compile Include="Interfaces\IGameObject.cs" />
-    <Compile Include="Items\Background.cs" />
-    <Compile Include="Items\ExitItem.cs" />
-    <Compile Include="Items\ItemFactory.cs" />
-    <Compile Include="Items\ItemObj.cs" />
-    <Compile Include="Items\MainField.cs" />
-    <Compile Include="Items\StartItem.cs" />
-    <Compile Include="Items\Panel.cs" />
-    <Compile Include="Items\EleObject.cs" />
-    <Compile Include="Items\OxyObject.cs" />
-    <Compile Include="Items\SunItem.cs" />
-    <Compile Include="Items\WaterObject.cs" />
     <Compile Include="MenuPage.xaml.cs">
       <DependentUpon>MenuPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Register\ContentEnum.cs" />
-    <Compile Include="Register\Options.cs" />
+    <Compile Include="Setting\Setup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -136,35 +138,40 @@
   <ItemGroup>
     <Content Include="Assets\Dark_Space.png" />
     <Content Include="Assets\marsMenu.png" />
-    <Content Include="Content\1.png" />
-    <Content Include="Content\2.png" />
-    <Content Include="Content\3.png" />
-    <Content Include="Content\4.png" />
-    <Content Include="Content\5.png" />
-    <Content Include="Content\6.png" />
+    <Content Include="Content\e7.png" />
+    <Content Include="Content\eo.png" />
+    <Content Include="Content\ew.png" />
+    <Content Include="Content\o6.png" />
+    <Content Include="Content\o3.png" />
+    <Content Include="Content\o2.png" />
+    <Content Include="Content\o5.png" />
+    <Content Include="Content\o1.png" />
+    <Content Include="Content\o4.png" />
     <Content Include="Content\background.jpg" />
-    <Content Include="Content\certo.png" />
     <Content Include="Content\ear.png" />
-    <Content Include="Content\Electric1.png" />
-    <Content Include="Content\Electroni2.png" />
-    <Content Include="Content\Electroni3.png" />
-    <Content Include="Content\Electroni4.png" />
-    <Content Include="Content\Electroni5.png" />
-    <Content Include="Content\Electroni6.png" />
-    <Content Include="Content\Empty.png" />
-    <Content Include="Content\mainFieldObj.png" />
-    <Content Include="Content\mars.png" />
-    <Content Include="Content\ok.png" />
+    <Content Include="Content\e5.png" />
+    <Content Include="Content\e6.png" />
+    <Content Include="Content\e2.png" />
+    <Content Include="Content\e3.png" />
+    <Content Include="Content\e4.png" />
+    <Content Include="Content\e1.png" />
+    <Content Include="Content\o7.png" />
+    <Content Include="Content\oe.png" />
+    <Content Include="Content\ow.png" />
+    <Content Include="Content\planet.png" />
     <Content Include="Content\ramka.png" />
     <Content Include="Content\star.png" />
     <Content Include="Content\Start.png" />
     <Content Include="Content\sun.png" />
     <Content Include="Content\w1.png" />
+    <Content Include="Content\w4.png" />
     <Content Include="Content\w2.png" />
     <Content Include="Content\w3.png" />
-    <Content Include="Content\w4.png" />
     <Content Include="Content\w5.png" />
     <Content Include="Content\w6.png" />
+    <Content Include="Content\w7.png" />
+    <Content Include="Content\we.png" />
+    <Content Include="Content\wo.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

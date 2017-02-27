@@ -16,7 +16,7 @@
             <RowDefinition Height="3*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Space Operations" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="MV Boli" Foreground="DarkGoldenrod" FontWeight="ExtraBlack"/>
+        <TextBlock Text="Begin again" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="MV Boli" Foreground="DarkGoldenrod" FontWeight="ExtraBlack"/>
         <StackPanel Orientation="Horizontal" Grid.Row="1">
         <StackPanel Grid.Row="1">
             <TextBlock Width="100"/>
